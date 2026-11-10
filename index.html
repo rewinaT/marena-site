@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marena Property Solution PLC</title>
+<meta name="description" content="Marena Property Solution PLC organises, leases and manages commercial, office and apartment buildings in Addis Ababa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+Ethiopic:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #1e63b0;
+    --blue-deep: #134480;
+    --blue-tint: #e9f1fa;
+    --ink: #101418;
+    --ink-soft: #4a545f;
+    --line: #d9e0e8;
+    --paper: #ffffff;
+    --paper-alt: #f4f7fa;
+    --font: "Archivo", "Noto Sans Ethiopic", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: var(--font);
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.6;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+  html[lang="am"] body { line-height: 1.8; }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+  /* Header */
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(255,255,255,.94);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .bar { display: flex; align-items: center; gap: 24px; height: 72px; }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; margin-right: auto; }
+  .brand svg { height: 44px; width: auto; flex: none; }
+  .brand b { display: block; font-weight: 800; font-size: 24px; letter-spacing: .02em; line-height: 1; }
+  .brand span { display: block; font-size: 10.5px; font-weight: 600; letter-spacing: .09em; margin-top: 3px; }
+  nav { display: flex; gap: 28px; }
+  nav a { text-decoration: none; font-weight: 500; font-size: 15px; color: var(--ink-soft); }
+  nav a:hover { color: var(--blue); }
+  .lang { display: flex; border: 1.5px solid var(--ink); }
+  .lang button {
+    font: inherit; font-size: 13px; font-weight: 600;
+    border: 0; background: none; padding: 6px 11px; cursor: pointer; color: var(--ink);
+  }
+  .lang button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+
+  /* Hero */
+  .hero { position: relative; overflow: hidden; background: var(--paper-alt); }
+  .hero .wrap { display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; min-height: 600px; }
+  .hero-copy { padding: 72px 0; }
+  .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--blue); margin: 0 0 18px; }
+  h1 { font-size: clamp(36px, 5vw, 58px); line-height: 1.08; font-weight: 800; margin: 0 0 22px; letter-spacing: -.015em; text-wrap: balance; }
+  html[lang="am"] h1 { line-height: 1.35; letter-spacing: 0; font-size: clamp(30px, 4.2vw, 48px); }
+  .lede { font-size: 19px; color: var(--ink-soft); max-width: 34em; margin: 0 0 32px; }
+  .cta { display: flex; flex-wrap: wrap; gap: 14px; }
+  .btn {
+    display: inline-block; text-decoration: none; font-weight: 600; font-size: 16px;
+    padding: 14px 26px; border: 2px solid var(--blue); background: var(--blue); color: #fff;
+    transition: background .15s, color .15s;
+  }
+  .btn:hover { background: var(--blue-deep); border-color: var(--blue-deep); }
+  .btn.ghost { background: none; color: var(--ink); border-color: var(--ink); }
+  .btn.ghost:hover { background: var(--ink); color: #fff; }
+  .hero-art { position: relative; align-self: stretch; min-height: 420px; }
+  .hero-art img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%;
+    clip-path: polygon(22% 0, 100% 0, 100% 100%, 0 100%, 0 14%);
+  }
+  .hero-art::after {
+    content: ""; position: absolute; left: -22px; bottom: 28px; width: 44px; height: 44px;
+    background: var(--ink); clip-path: polygon(0 0, 100% 50%, 0 100%); z-index: 1;
+  }
+
+  /* Facts strip */
+  .facts { background: var(--blue); color: #fff; }
+  .facts .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .fact { padding: 30px 24px 30px 0; }
+  .fact + .fact { padding-left: 32px; border-left: 1px solid rgba(255,255,255,.28); }
+  .fact b { display: block; font-size: 38px; font-weight: 800; line-height: 1.1; }
+  .fact span { font-size: 14.5px; opacity: .9; }
+
+  /* Sections */
+  section { padding: 96px 0; }
+  .alt { background: var(--paper-alt); }
+  h2 { font-size: clamp(28px, 3.4vw, 40px); line-height: 1.15; font-weight: 800; margin: 0 0 18px; letter-spacing: -.01em; text-wrap: balance; }
+  html[lang="am"] h2 { line-height: 1.4; letter-spacing: 0; }
+  .sub { color: var(--ink-soft); max-width: 40em; margin: 0 0 48px; }
+
+  .about { display: grid; grid-template-columns: .8fr 1.2fr; gap: 64px; align-items: center; }
+  .about figure { margin: 0; position: relative; }
+  .about img { width: 100%; aspect-ratio: 4/5; object-fit: cover; clip-path: polygon(0 0, 82% 0, 100% 12%, 100% 100%, 0 100%); }
+  .about figcaption { font-size: 13px; color: var(--ink-soft); margin-top: 10px; }
+  .about p { color: var(--ink-soft); margin: 0 0 18px; }
+  .motto {
+    margin: 32px 0 0; padding: 22px 26px; border-left: 6px solid var(--blue); background: var(--blue-tint);
+    font-weight: 700; font-size: 20px; color: var(--blue-deep); line-height: 1.5;
+  }
+  .motto small { display: block; font-weight: 500; font-size: 15px; color: var(--ink-soft); margin-top: 6px; }
+
+  .services { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .service { background: var(--paper); padding: 36px 34px 38px; position: relative; }
+  .service i {
+    font-style: normal; font-weight: 800; font-size: 14px; color: var(--blue); letter-spacing: .1em;
+    display: block; margin-bottom: 14px;
+  }
+  .service h3 { font-size: 23px; font-weight: 800; margin: 0 0 10px; line-height: 1.25; }
+  .service p { margin: 0; color: var(--ink-soft); }
+  .service::after {
+    content: ""; position: absolute; right: 0; top: 0; width: 34px; height: 34px;
+    background: var(--blue); clip-path: polygon(100% 0, 100% 100%, 0 0);
+  }
+
+  .projects { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
+  .projects li {
+    display: grid; grid-template-columns: 1.3fr 1fr 1.4fr; gap: 24px; align-items: baseline;
+    padding: 22px 0; border-bottom: 1px solid var(--line);
+  }
+  .projects h3 { margin: 0; font-size: 20px; font-weight: 800; line-height: 1.3; }
+  .projects .where { color: var(--ink-soft); font-size: 15.5px; }
+  .projects .what { font-size: 15.5px; }
+  .projects .spec {
+    display: inline-block; font-weight: 700; font-size: 13px; letter-spacing: .04em;
+    background: var(--ink); color: #fff; padding: 2px 9px; margin-right: 8px;
+    font-family: "Archivo", sans-serif;
+  }
+
+  /* Contact */
+  .contact { background: var(--ink); color: #fff; }
+  .contact h2 { color: #fff; }
+  .contact .sub { color: #b8c2cc; }
+  .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  .contact h3 { font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #7fb2ea; margin: 0 0 14px; }
+  .contact ul { list-style: none; margin: 0; padding: 0; }
+  .contact li { margin-bottom: 10px; }
+  .contact li a { text-decoration: none; font-size: 19px; font-weight: 600; border-bottom: 1px solid transparent; overflow-wrap: anywhere; }
+  .contact li a:hover { border-color: #7fb2ea; }
+  .contact address { font-style: normal; color: #dfe5eb; margin-bottom: 18px; }
+  .contact address b { display: block; color: #fff; }
+
+  footer { background: #080a0c; color: #8d98a3; font-size: 14px; padding: 24px 0; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+
+  @media (max-width: 860px) {
+    nav { display: none; }
+    .hero .wrap { grid-template-columns: 1fr; gap: 0; }
+    .hero-copy { padding: 56px 0 40px; }
+    .hero-art { min-height: 360px; margin: 0 -24px; }
+    .hero-art::before, .hero-art::after { display: none; }
+    .hero-art img { clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%); }
+    .about, .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+    .about figure { max-width: 380px; }
+    .services { grid-template-columns: 1fr; }
+    .projects li { grid-template-columns: 1fr; gap: 4px; }
+    section { padding: 68px 0; }
+    .fact b { font-size: 28px; }
+    .fact { padding: 22px 12px 22px 0; }
+    .fact + .fact { padding-left: 16px; }
+    .fact span { font-size: 13px; }
+  }
+  @media (max-width: 480px) {
+    .wrap { padding: 0 16px; }
+    .hero-art { margin: 0 -16px; }
+    .brand span { display: none; }
+    .brand b { font-size: 21px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="Marena Property Solution PLC">
+      <svg viewBox="0 0 60 84" aria-hidden="true">
+        <path fill="#1e63b0" d="M0 26 22 4v80H0z"/>
+        <path fill="#1e63b0" d="M60 26 38 4v80h22z"/>
+        <path fill="#fff" d="M13 40h4v44h-4zM43 40h4v44h-4z"/>
+        <path fill="#1e63b0" d="M26 22 30 16l4 6v62h-8z"/>
+      </svg>
+      <div><b>MARENA</b><span>PROPERTY SOLUTION PLC</span></div>
+    </a>
+    <nav>
+      <a href="#about" data-i18n="nav_about">About</a>
+      <a href="#services" data-i18n="nav_services">Services</a>
+      <a href="#projects" data-i18n="nav_projects">Projects</a>
+      <a href="#contact" data-i18n="nav_contact">Contact</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang="am" aria-pressed="false">አማ</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <p class="eyebrow" data-i18n="hero_eyebrow">Building organising · Leasing · Management</p>
+        <h1 data-i18n="hero_title">We organise, lease and manage your building.</h1>
+        <p class="lede" data-i18n="hero_lede">Marena Property Solution PLC is an Addis Ababa consultancy that organises, leases and manages commercial, office and apartment buildings on behalf of their owners.</p>
+        <div class="cta">
+          <a class="btn" href="#contact" data-i18n="cta_talk">Talk to us</a>
+          <a class="btn ghost" href="#services" data-i18n="cta_services">See our services</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <img src="assets/tower-day.jpg" alt="Dema Hope Real Estate tower, a 3B+G+21 mixed-use building at Signal, Addis Ababa">
+      </div>
+    </div>
+  </div>
+
+  <div class="facts">
+    <div class="wrap">
+      <div class="fact"><b data-i18n="fact1_n">2004 E.C.</b><span data-i18n="fact1_l">Year established</span></div>
+      <div class="fact"><b>G+21</b><span data-i18n="fact2_l">Tallest building in our care</span></div>
+      <div class="fact"><b>4</b><span data-i18n="fact3_l">Services, from first plan to daily operations</span></div>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="wrap about">
+      <figure>
+        <img src="assets/tower-night.jpg" alt="Dema Hope tower lit at dusk">
+        <figcaption data-i18n="about_cap">Dema Hope Real Estate, Signal</figcaption>
+      </figure>
+      <div>
+        <p class="eyebrow" data-i18n="about_eyebrow">About us</p>
+        <h2 data-i18n="about_title">A partner for building owners, from empty floors to full occupancy.</h2>
+        <p data-i18n="about_p1">Founded in 2004 E.C., Marena works with owners of commercial, office and apartment buildings. We study the market, plan the right mix of tenants for each floor, set rents, and bring in the tenants and buyers the building needs.</p>
+        <p data-i18n="about_p2">Once the building is occupied we stay on to run it: collecting rent, looking after security, cleaning and maintenance, and keeping the owner informed.</p>
+        <p class="motto" lang="am">የእኛ ትጋት እርስዎ በስራዎ ውጤታማ እንደሆኑ ማድረግ ነው!!
+          <small lang="en" data-i18n="motto_en">Our diligence is making sure you succeed in your work.</small>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="alt">
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="svc_eyebrow">What we do</p>
+      <h2 data-i18n="svc_title">Four services for commercial, office and apartment buildings</h2>
+      <p class="sub" data-i18n="svc_sub">Take one service or all four. Most owners start with organising and stay with us for management.</p>
+      <div class="services">
+        <article class="service">
+          <i>01</i>
+          <h3 data-i18n="s1_t">Organising</h3>
+          <p data-i18n="s1_d">Market study, a floor-by-floor tenant mix, rent pricing and a marketing strategy, ready before the building opens.</p>
+        </article>
+        <article class="service">
+          <i>02</i>
+          <h3 data-i18n="s2_t">Leasing and sales</h3>
+          <p data-i18n="s2_d">Finding suitable tenants and buyers, negotiating terms and preparing agreements on the owner's behalf.</p>
+        </article>
+        <article class="service">
+          <i>03</i>
+          <h3 data-i18n="s3_t">Consulting</h3>
+          <p data-i18n="s3_d">Advice for owners and developers on layout, pricing and how to get more from an existing building.</p>
+        </article>
+        <article class="service">
+          <i>04</i>
+          <h3 data-i18n="s4_t">Management</h3>
+          <p data-i18n="s4_d">Rent collection, security, cleaning, parking, maintenance and utilities, with regular reports to the owner.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="prj_eyebrow">Current clients</p>
+      <h2 data-i18n="prj_title">Buildings we are serving now</h2>
+      <p class="sub" data-i18n="prj_sub">A selection of the buildings in Addis Ababa currently under our care.</p>
+      <ul class="projects">
+        <li>
+          <h3 data-i18n="p1_n">Dema Hope Real Estate</h3>
+          <div class="where" data-i18n="p1_w">Signal</div>
+          <div class="what"><span class="spec">3B+G+21</span><span data-i18n="use_cr">Commercial and residential apartments</span></div>
+        </li>
+        <li>
+          <h3 data-i18n="p2_n">Fenet Mall</h3>
+          <div class="where" data-i18n="p2_w">Opposite Abu Ashu butchery</div>
+          <div class="what"><span class="spec">B+G+2</span><span data-i18n="use_c">Commercial</span></div>
+        </li>
+        <li>
+          <h3 data-i18n="p3_n">Mabet Mall</h3>
+          <div class="where" data-i18n="p3_w">Jacros roundabout</div>
+          <div class="what"><span class="spec">B+G+8</span><span data-i18n="use_cr">Commercial and residential apartments</span></div>
+        </li>
+        <li>
+          <h3 data-i18n="p4_n">Smart Plaza</h3>
+          <div class="where" data-i18n="p4_w">Lideta condominium area</div>
+          <div class="what"><span data-i18n="use_cr">Commercial and residential apartments</span></div>
+        </li>
+        <li>
+          <h3 data-i18n="p5_n">Blen Plaza</h3>
+          <div class="where" data-i18n="p4_w">Lideta condominium area</div>
+          <div class="what"><span data-i18n="use_cor">Commercial, office and residential apartments</span></div>
+        </li>
+        <li>
+          <h3 data-i18n="p6_n">GTAT Real Estate</h3>
+          <div class="where" data-i18n="p6_w">Bulgaria</div>
+          <div class="what"><span class="spec">1B+G+10</span><span data-i18n="use_cr">Commercial and residential apartments</span></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <p class="eyebrow" style="color:#7fb2ea" data-i18n="ct_eyebrow">Contact</p>
+      <h2 data-i18n="ct_title">Have a building that needs tenants or a manager?</h2>
+      <p class="sub" data-i18n="ct_sub">Call or email us and we will arrange a visit.</p>
+      <div class="contact-grid">
+        <div>
+          <h3 data-i18n="ct_phone">Phone</h3>
+          <ul>
+            <li><a href="tel:+251911714355">+251 911 714355</a></li>
+            <li><a href="tel:+251924005000">+251 924 005000</a></li>
+            <li><a href="tel:+251984202023">+251 984 202023</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 data-i18n="ct_email">Email</h3>
+          <ul>
+            <li><a href="mailto:marenaproperty3@gmail.com">marenaproperty3@gmail.com</a></li>
+            <li><a href="mailto:marenaproperty3@yahoo.com">marenaproperty3@yahoo.com</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 data-i18n="ct_offices">Offices</h3>
+          <address><b data-i18n="of1_n">22 Zurga Building</b><span data-i18n="of1_d">3rd floor, office 402, Bole, Addis Ababa</span></address>
+          <address><b data-i18n="of2_n">Dema Hope Real Estate</b><span data-i18n="of2_d">Signal, Addis Ababa</span></address>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr"></span> Marena Property Solution PLC</span>
+    <span data-i18n="ft_place">Addis Ababa, Ethiopia</span>
+  </div>
+</footer>
+
+<script>
+const am = {
+  nav_about: "ስለ እኛ", nav_services: "አገልግሎቶች", nav_projects: "ደንበኞች", nav_contact: "አድራሻ",
+  hero_eyebrow: "የህንፃ ማደራጀት · ማከራየት · ማስተዳደር",
+  hero_title: "ህንፃዎን እናደራጃለን፣ እናከራያለን፣ እናስተዳድራለን።",
+  hero_lede: "ማሬና ፕሮፐርቲ ሶልሽን ኃ.የተ.የግ.ማ. የንግድ፣ የቢሮና የአፓርትመንት ህንፃዎችን በባለቤቶቻቸው ስም የሚያደራጅ፣ የሚያከራይና የሚያስተዳድር በአዲስ አበባ የሚገኝ አማካሪ ድርጅት ነው።",
+  cta_talk: "ያነጋግሩን", cta_services: "አገልግሎቶቻችንን ይመልከቱ",
+  fact1_n: "2004 ዓ.ም", fact1_l: "የተመሰረተበት ዓመት",
+  fact2_l: "በእኛ አገልግሎት ስር ያለ ረጅሙ ህንፃ",
+  fact3_l: "አገልግሎቶች፤ ከመጀመሪያው እቅድ እስከ ዕለታዊ አስተዳደር",
+  about_cap: "ዴማ ሆፕ ሪል እስቴት፣ ሲግናል",
+  about_eyebrow: "ስለ እኛ",
+  about_title: "ከባዶ ፎቆች እስከ ሙሉ ተከራይ ድረስ የህንፃ ባለቤቶች አጋር።",
+  about_p1: "ማሬና በ2004 ዓ.ም ተመስርቶ ከንግድ፣ ከቢሮና ከአፓርትመንት ህንፃ ባለቤቶች ጋር ይሰራል። ገበያውን እናጠናለን፣ ለየፎቁ ተገቢውን የተከራይ ስብጥር እናቅዳለን፣ የኪራይ ዋጋ እንተምናለን፣ ህንፃው የሚያስፈልጉትን ተከራዮችና ገዢዎች እናመጣለን።",
+  about_p2: "ህንፃው ከተያዘ በኋላም አብረን እንቀጥላለን፤ ኪራይ እንሰበስባለን፣ ጥበቃ፣ ጽዳትና ጥገናን እንከታተላለን፣ ለባለቤቱም በየጊዜው ሪፖርት እናቀርባለን።",
+  motto_en: "",
+  svc_eyebrow: "የምንሰጣቸው አገልግሎቶች",
+  svc_title: "ለንግድ፣ ለቢሮና ለአፓርትመንት ህንፃዎች አራት አገልግሎቶች",
+  svc_sub: "አንዱን ወይም አራቱንም አገልግሎት መውሰድ ይችላሉ።",
+  s1_t: "ማደራጀት",
+  s1_d: "ህንፃው ስራ ከመጀመሩ በፊት የገበያ ጥናት፣ የየፎቁ የተከራይ ስብጥር፣ የኪራይ ዋጋ ትመና እና የግብይት ስትራቴጂ።",
+  s2_t: "ማከራየትና መሸጥ",
+  s2_d: "ተገቢ ተከራዮችንና ገዢዎችን ማፈላለግ፣ መደራደር እና በባለቤቱ ስም ውሎችን ማዘጋጀት።",
+  s3_t: "ማማከር",
+  s3_d: "ለህንፃ ባለቤቶችና አልሚዎች በአቀማመጥ፣ በዋጋ አወሳሰን እና ያለውን ህንፃ ይበልጥ ውጤታማ በማድረግ ላይ ምክር።",
+  s4_t: "ማስተዳደር",
+  s4_d: "የኪራይ አሰባሰብ፣ ጥበቃ፣ ጽዳት፣ ፓርኪንግ፣ ጥገና እና የመገልገያ አገልግሎቶች፤ ለባለቤቱ ከመደበኛ ሪፖርት ጋር።",
+  prj_eyebrow: "የአሁን ደንበኞች",
+  prj_title: "ድርጅታችን አሁን አገልግሎት እየሰጣቸው ካሉ ደንበኞች መካከል",
+  prj_sub: "በአዲስ አበባ በአሁኑ ጊዜ አገልግሎት ከምንሰጣቸው ህንፃዎች ጥቂቶቹ።",
+  p1_n: "ዴማ ሆፕ ሪል እስቴት ህንፃ", p1_w: "ሲግናል ጫፍ",
+  p2_n: "ፌኔት ሞል", p2_w: "አቡ አሹ ስጋ ቤት ፊት ለፊት",
+  p3_n: "ማበት ሞል", p3_w: "ጃክሮስ አደባባይ",
+  p4_n: "ስማርት ፕላዛ", p4_w: "ልደታ ኮንዶሚኒየም አካባቢ",
+  p5_n: "ብሌን ፕላዛ",
+  p6_n: "ጂቲኤቲ ሪል እስቴት", p6_w: "ቡልጋሪያ ጫፍ",
+  use_cr: "የንግድና የመኖሪያ አፓርትመንት ህንፃ",
+  use_c: "የንግድ ህንፃ",
+  use_cor: "የንግድ፣ የቢሮና የመኖሪያ አፓርትመንት ህንፃ",
+  ct_eyebrow: "አድራሻ",
+  ct_title: "ተከራይ ወይም አስተዳዳሪ የሚያስፈልገው ህንፃ አለዎት?",
+  ct_sub: "ይደውሉልን ወይም ኢሜይል ይላኩልን፤ ለጉብኝት ቀጠሮ እንይዛለን።",
+  ct_phone: "ስልክ", ct_email: "ኢሜይል", ct_offices: "ቢሮዎች",
+  of1_n: "ሀያ ሁለት ዙርጋ ህንፃ", of1_d: "3ኛ ፎቅ፣ የቢሮ ቁጥር 402፣ ቦሌ፣ አዲስ አበባ",
+  of2_n: "ዴማ ሆፕ ሪል እስቴት ህንፃ", of2_d: "ሲግናል፣ አዲስ አበባ",
+  ft_place: "አዲስ አበባ፣ ኢትዮጵያ"
+};
+const nodes = [...document.querySelectorAll("[data-i18n]")];
+const en = Object.fromEntries(nodes.map(n => [n.dataset.i18n, n.textContent]));
+function setLang(l) {
+  const d = l === "am" ? am : en;
+  nodes.forEach(n => { n.textContent = d[n.dataset.i18n] ?? en[n.dataset.i18n]; });
+  document.documentElement.lang = l;
+  document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === l)));
+  try { localStorage.setItem("lang", l); } catch (e) {}
+}
+document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => setLang(b.dataset.lang)));
+let saved = "en";
+try { saved = localStorage.getItem("lang") || "en"; } catch (e) {}
+if (saved === "am") setLang("am");
+document.getElementById("yr").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
