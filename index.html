@@ -3,12 +3,33 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Marena Property Solution PLC</title>
-<meta name="description" content="Marena Property Solution PLC organises, leases, sells and manages commercial, office and apartment buildings in Addis Ababa.">
-<link rel="icon" href="assets/logo.png">
+<title>Marena Property Solution PLC | Building management, leasing and sales in Addis Ababa</title>
+<meta name="description" content="Marena Property Solution PLC organises, leases, sells and manages commercial, office and residential apartment buildings in Addis Ababa, and advises their owners.">
+<link rel="canonical" href="https://marenaproperties.net/">
+<link rel="alternate" hreflang="en" href="https://marenaproperties.net/">
+<link rel="alternate" hreflang="am" href="https://marenaproperties.net/?lang=am">
+<link rel="alternate" hreflang="x-default" href="https://marenaproperties.net/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Marena Property Solution PLC">
+<meta property="og:title" content="Marena Property Solution PLC | Building management, leasing and sales in Addis Ababa">
+<meta property="og:description" content="We organise, lease, sell and manage commercial, office and residential apartment buildings in Addis Ababa, and advise their owners.">
+<meta property="og:url" content="https://marenaproperties.net/">
+<meta property="og:image" content="https://marenaproperties.net/assets/share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Marena Property Solution PLC logo beside the Dema Hope Real Estate tower">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="am_ET">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1e63b0">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preload" as="image" href="assets/dema-hope.webp" type="image/webp" fetchpriority="high">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "RealEstateAgent", "name": "Marena Property Solution PLC", "alternateName": "ማሪና ፕሮፐርቲ ሶልሺን ኃ/የተ/የግ/ማህበር", "description": "Building organising, leasing, sales, management and consultancy for commercial, office and residential apartment buildings in Addis Ababa.", "url": "https://marenaproperties.net/", "logo": "https://marenaproperties.net/assets/logo.png", "image": "https://marenaproperties.net/assets/share.jpg", "email": "info@marenaproperties.net", "telephone": ["+251911714355", "+251924005000", "+251984202023"], "address": {"@type": "PostalAddress", "streetAddress": "22 Zurga Building, 3rd floor, office no. 35, Bole Woreda 4", "addressLocality": "Addis Ababa", "addressCountry": "ET"}, "areaServed": {"@type": "City", "name": "Addis Ababa"}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Noto+Sans+Ethiopic:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..800&family=Noto+Sans+Ethiopic:wght@400..800&display=swap" rel="stylesheet">
 <style>
   :root {
     --blue: #1e63b0;
@@ -28,7 +49,7 @@
     line-height: 1.6; font-size: 17px; -webkit-font-smoothing: antialiased;
   }
   html[lang="am"] body { line-height: 1.8; }
-  img { max-width: 100%; display: block; }
+  img { max-width: 100%; height: auto; display: block; }
   a { color: inherit; }
   .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 
@@ -138,6 +159,16 @@
   .contact li a:hover { border-color: #7fb2ea; }
   .contact address { font-style: normal; color: #dfe5eb; }
   .contact address b { display: block; color: #fff; font-size: 19px; }
+
+  .skip { position: absolute; left: 12px; top: -60px; z-index: 30; background: var(--ink); color: #fff; padding: 10px 16px; font-weight: 600; text-decoration: none; transition: top .2s; }
+  .skip:focus { top: 10px; }
+  .chat { display: flex; flex-wrap: wrap; gap: 14px; margin: -16px 0 48px; }
+  .contact .btn.ghost { color: #fff; border-color: #fff; }
+  .contact .btn.ghost:hover { background: #fff; color: var(--ink); }
+  .contact .btn:focus-visible, .contact a:focus-visible { outline-color: #7fb2ea; }
+  .dir { display: inline-block; margin-top: 14px; color: #7fb2ea; font-weight: 600; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .2s, color .2s; }
+  .dir:hover { border-color: #7fb2ea; color: #a9cdf5; }
+  .dir::after { content: " →"; font-family: "Archivo", sans-serif; }
 
   footer { background: #080a0c; color: #8d98a3; font-size: 14px; padding: 24px 0; }
   footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
@@ -276,7 +307,7 @@
       opacity: 0; transform: translateY(-10px); pointer-events: none; visibility: hidden;
       transition: opacity .25s, transform .3s var(--ease), visibility .3s;
     }
-    nav.open { opacity: 1; transform: none; pointer-events: auto; visibility: visible; }
+    nav.open { opacity: 1; transform: none; pointer-events: auto; visibility: visible; transition: opacity .25s, transform .3s var(--ease), visibility 0s; }
     nav a { padding: 13px 0; font-size: 17px; border-bottom: 1px solid var(--line); }
     nav a:last-child { border-bottom: 0; }
     nav a::after { display: none; }
@@ -313,26 +344,27 @@
 </head>
 <body>
 <script>document.documentElement.classList.add("js");</script>
+<a class="skip" href="#top" data-i18n="skip">Skip to content</a>
 <div class="progress" aria-hidden="true"></div>
 
 <header>
   <div class="wrap bar">
-    <a class="brand" href="#top"><img src="assets/logo.png" alt="Marena Property Solution PLC"></a>
+    <a class="brand" href="#top"><img src="assets/logo.png" width="640" height="250" alt="Marena Property Solution PLC"></a>
     <nav id="nav">
       <a href="#about" data-i18n="nav_about">About</a>
       <a href="#services" data-i18n="nav_services">Services</a>
       <a href="#clients" data-i18n="nav_clients">Clients</a>
       <a href="#contact" data-i18n="nav_contact">Contact</a>
     </nav>
-    <div class="lang" role="group" aria-label="Language">
+    <div class="lang" role="group" aria-label="Language" data-i18n-label="l_lang">
       <button type="button" data-lang="en" aria-pressed="true">EN</button>
       <button type="button" data-lang="am" aria-pressed="false">አማ</button>
     </div>
-    <button type="button" class="menu" aria-label="Menu" aria-controls="nav" aria-expanded="false"><span></span></button>
+    <button type="button" class="menu" aria-label="Menu" data-i18n-label="l_menu" aria-controls="nav" aria-expanded="false"><span></span></button>
   </div>
 </header>
 
-<main id="top">
+<main id="top" tabindex="-1">
   <div class="hero">
     <div class="wrap">
       <div class="hero-copy">
@@ -345,7 +377,7 @@
         </div>
       </div>
       <div class="hero-art">
-        <img src="assets/dema-hope.jpg" alt="Dema Hope Real Estate, a 3B+G+21 commercial and residential tower at Signal, Addis Ababa">
+        <picture><source srcset="assets/dema-hope.webp" type="image/webp"><img src="assets/dema-hope.jpg" width="1000" height="1029" fetchpriority="high" data-i18n-alt="a_hero" alt="Dema Hope Real Estate, a 3B+G+21 commercial and residential tower at Signal, Addis Ababa"></picture>
       </div>
     </div>
   </div>
@@ -364,7 +396,7 @@
   <section id="about">
     <div class="wrap about">
       <figure>
-        <img src="assets/dema-site.jpg" alt="Dema Hope Real Estate tower">
+        <picture><source srcset="assets/dema-site.webp" type="image/webp"><img src="assets/dema-site.jpg" width="407" height="720" loading="lazy" data-i18n-alt="a_about" alt="Dema Hope Real Estate tower"></picture>
         <figcaption data-i18n="about_cap">Dema Hope Real Estate, Signal</figcaption>
       </figure>
       <div>
@@ -437,12 +469,12 @@
       <p class="sub" data-i18n="cl_sub">Some of the buildings in Addis Ababa that Marena and its professionals serve or have served.</p>
 
       <div class="gallery">
-        <figure><img src="assets/dema-hope.jpg" alt="" loading="lazy"><figcaption><span data-i18n="g1">Dema Hope Real Estate</span><small data-i18n="g1w">Signal</small></figcaption></figure>
-        <figure><img src="assets/zefmesh.jpg" alt="" loading="lazy"><figcaption><span data-i18n="g2">Zefmesh Grand Mall</span><small data-i18n="g2w">Megenagna</small></figcaption></figure>
-        <figure><img src="assets/merkeb.jpg" alt="" loading="lazy"><figcaption><span data-i18n="g3">Merkeb Plaza</span><small data-i18n="g3w">Olympia</small></figcaption></figure>
-        <figure><img src="assets/salam.jpg" alt="" loading="lazy"><figcaption><span data-i18n="g4">Salam Tower</span></figcaption></figure>
-        <figure><img src="assets/smart.jpg" alt="" loading="lazy"><figcaption><span data-i18n="g5">Smart Plaza</span><small data-i18n="g5w">Lideta</small></figcaption></figure>
-        <figure><img src="assets/tewedaj.jpg" alt="" loading="lazy"><figcaption><span data-i18n="g6">Tewedaj Building</span><small data-i18n="g6w">Gurd Shola</small></figcaption></figure>
+        <figure><picture><source srcset="assets/dema-hope.webp" type="image/webp"><img src="assets/dema-hope.jpg" width="1000" height="1029" loading="lazy" data-i18n-alt="a_g1" alt="Exterior of Dema Hope Real Estate"></picture><figcaption><span data-i18n="g1">Dema Hope Real Estate</span><small data-i18n="g1w">Signal</small></figcaption></figure>
+        <figure><picture><source srcset="assets/zefmesh.webp" type="image/webp"><img src="assets/zefmesh.jpg" width="970" height="678" loading="lazy" data-i18n-alt="a_g2" alt="Exterior of Zefmesh Grand Mall"></picture><figcaption><span data-i18n="g2">Zefmesh Grand Mall</span><small data-i18n="g2w">Megenagna</small></figcaption></figure>
+        <figure><picture><source srcset="assets/merkeb.webp" type="image/webp"><img src="assets/merkeb.jpg" width="843" height="1280" loading="lazy" data-i18n-alt="a_g3" alt="Exterior of Merkeb Plaza"></picture><figcaption><span data-i18n="g3">Merkeb Plaza</span><small data-i18n="g3w">Olympia</small></figcaption></figure>
+        <figure><picture><source srcset="assets/salam.webp" type="image/webp"><img src="assets/salam.jpg" width="638" height="1000" loading="lazy" data-i18n-alt="a_g4" alt="Exterior of Salam Tower"></picture><figcaption><span data-i18n="g4">Salam Tower</span></figcaption></figure>
+        <figure><picture><source srcset="assets/smart.webp" type="image/webp"><img src="assets/smart.jpg" width="327" height="690" loading="lazy" data-i18n-alt="a_g5" alt="Exterior of Smart Plaza"></picture><figcaption><span data-i18n="g5">Smart Plaza</span><small data-i18n="g5w">Lideta</small></figcaption></figure>
+        <figure><picture><source srcset="assets/tewedaj.webp" type="image/webp"><img src="assets/tewedaj.jpg" width="387" height="600" loading="lazy" data-i18n-alt="a_g6" alt="Exterior of Tewedaj Building"></picture><figcaption><span data-i18n="g6">Tewedaj Building</span><small data-i18n="g6w">Gurd Shola</small></figcaption></figure>
       </div>
 
       <h3 class="list-title" data-i18n="cur_title">Currently serving</h3>
@@ -460,6 +492,10 @@
       <p class="eyebrow" style="color:#7fb2ea" data-i18n="ct_eyebrow">Contact</p>
       <h2 data-i18n="ct_title">Book a meeting and let us tell you more.</h2>
       <p class="sub" data-i18n="ct_sub">Our fee depends on the services you choose and is agreed in discussion with each client.</p>
+      <div class="chat">
+        <a class="btn" href="https://wa.me/251911714355" target="_blank" rel="noopener" data-i18n="ct_wa">Chat on WhatsApp</a>
+        <a class="btn ghost" href="https://t.me/+251911714355" target="_blank" rel="noopener" data-i18n="ct_tg">Message on Telegram</a>
+      </div>
       <div class="contact-grid">
         <div>
           <h3 data-i18n="ct_phone">Phone</h3>
@@ -478,6 +514,7 @@
         <div>
           <h3 data-i18n="ct_office">Office</h3>
           <address><b data-i18n="of_n">22 Zurga Building</b><span data-i18n="of_d">3rd floor, office no. 35, Bole Woreda 4, Addis Ababa, Ethiopia</span></address>
+          <a class="dir" href="https://www.google.com/maps/search/?api=1&amp;query=Zurga+Building%2C+Haya+Hulet%2C+Addis+Ababa" target="_blank" rel="noopener" data-i18n="ct_dir">Get directions</a>
         </div>
       </div>
     </div>
@@ -490,7 +527,7 @@
     <span data-i18n="ft_place">Addis Ababa, Ethiopia</span>
   </div>
 </footer>
-<button type="button" class="top" aria-label="Back to top">↑</button>
+<button type="button" class="top" aria-label="Back to top" data-i18n-label="l_top">↑</button>
 
 <script>
 const am = {
@@ -542,7 +579,15 @@ const am = {
   ct_sub: "የአገልግሎት ክፍያችን በመረጡት አገልግሎት ላይ ተመስርቶ ከደንበኞቻችን ጋር በውይይት ይወሰናል።",
   ct_phone: "ስልክ", ct_email: "ኢሜል", ct_office: "ቢሮ",
   of_n: "ሀያ ሁለት ዙርጋ ህንፃ", of_d: "3ኛ ፎቅ፣ የቢሮ ቁጥር 35፣ ቦሌ ወረዳ 4፣ አዲስ አበባ፣ ኢትዮጵያ",
-  ft_place: "አዲስ አበባ፣ ኢትዮጵያ"
+  ft_place: "አዲስ አበባ፣ ኢትዮጵያ",
+  skip: "ወደ ዋናው ይዘት ይለፉ",
+  ct_wa: "በዋትስአፕ ያነጋግሩን", ct_tg: "በቴሌግራም ይፃፉልን", ct_dir: "አቅጣጫ ይመልከቱ",
+  l_lang: "ቋንቋ", l_menu: "ማውጫ", l_top: "ወደ ላይ ይመለሱ",
+  a_hero: "ዴማ ሆፕ ሪል እስቴት፣ ሲግናል የሚገኝ 3B+G+21 የንግድና የመኖሪያ አፓርትመንት ህንፃ",
+  a_about: "ዴማ ሆፕ ሪል እስቴት ህንፃ",
+  a_g1: "የዴማ ሆፕ ሪል እስቴት ህንፃ ውጫዊ ገጽታ", a_g2: "የዘፍመሽ ግራንድ ሞል ውጫዊ ገጽታ", a_g3: "የመርከብ ፕላዛ ውጫዊ ገጽታ",
+  a_g4: "የሰላም ታወር ውጫዊ ገጽታ", a_g5: "የስማርት ፕላዛ ውጫዊ ገጽታ", a_g6: "የተወዳጅ ህንፃ ውጫዊ ገጽታ",
+  doc_title: "ማሪና ፕሮፐርቲ ሶልሺን ኃ/የተ/የግ/ማህበር | የህንፃ ማስተዳደር፣ ማከራየትና ሽያጭ በአዲስ አበባ"
 };
 
 const USE = {
@@ -598,17 +643,40 @@ function renderTicker(l) {
 }
 const nodes = [...document.querySelectorAll("[data-i18n]")];
 const en = Object.fromEntries(nodes.map(n => [n.dataset.i18n, n.textContent]));
+// translated attributes: alt text and aria-labels
+const attrNodes = [];
+[["i18nAlt", "alt"], ["i18nLabel", "aria-label"]].forEach(([key, attr]) =>
+  document.querySelectorAll("[data-" + key.replace(/[A-Z]/g, c => "-" + c.toLowerCase()) + "]").forEach(n => {
+    en[n.dataset[key]] = n.getAttribute(attr); attrNodes.push([n, attr, n.dataset[key]]);
+  }));
+const metaDesc = document.querySelector('meta[name="description"]'), ogLocale = document.querySelector('meta[property="og:locale"]');
+en.doc_title = document.title; en.doc_desc = metaDesc.content;
 function setLang(l) {
   const d = l === "am" ? am : en;
   nodes.forEach(n => { n.textContent = d[n.dataset.i18n] ?? en[n.dataset.i18n]; });
+  attrNodes.forEach(([n, attr, key]) => n.setAttribute(attr, d[key] ?? en[key]));
+  document.title = d.doc_title ?? en.doc_title;
+  metaDesc.content = l === "am" ? am.hero_lede : en.doc_desc;
+  ogLocale.content = l === "am" ? "am_ET" : "en_US";
   renderList("current", CURRENT, l); renderList("past", PAST, l); renderTicker(l);
   document.documentElement.lang = l;
   document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === l)));
   try { localStorage.setItem("lang", l); } catch (e) {}
 }
-document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => setLang(b.dataset.lang)));
+document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => {
+  setLang(b.dataset.lang);
+  // keep the address shareable: ?lang=am for Amharic, clean for English
+  try {
+    const u = new URL(location.href);
+    if (b.dataset.lang === "am") u.searchParams.set("lang", "am"); else u.searchParams.delete("lang");
+    history.replaceState(null, "", u);
+  } catch (e) {}
+}));
 let saved = "en";
 try { saved = localStorage.getItem("lang") || "en"; } catch (e) {}
+// a ?lang= in the address wins over the remembered choice
+const asked = new URLSearchParams(location.search).get("lang");
+if (asked === "am" || asked === "en") saved = asked;
 setLang(saved === "am" ? "am" : "en");
 document.getElementById("yr").textContent = new Date().getFullYear();
 
@@ -672,10 +740,18 @@ topBtn.addEventListener("click", () => scrollTo({ top: 0, behavior: calm ? "auto
 
 // Mobile menu
 const menu = document.querySelector(".menu"), nav = document.getElementById("nav");
-function setMenu(open) { nav.classList.toggle("open", open); menu.setAttribute("aria-expanded", String(open)); }
-menu.addEventListener("click", () => setMenu(!nav.classList.contains("open")));
+function setMenu(open, refocus) {
+  const was = nav.classList.contains("open");
+  nav.classList.toggle("open", open); menu.setAttribute("aria-expanded", String(open));
+  if (open && !was) nav.querySelector("a").focus();
+  else if (!open && was && refocus) menu.focus();
+}
+menu.addEventListener("click", () => setMenu(!nav.classList.contains("open"), true));
 nav.addEventListener("click", e => { if (e.target.closest("a")) setMenu(false); });
-addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
+addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false, true); });
+// close when clicking or tabbing outside the header
+addEventListener("click", e => { if (!e.target.closest("header")) setMenu(false); });
+head.addEventListener("focusout", e => { if (e.relatedTarget && !head.contains(e.relatedTarget)) setMenu(false); });
 
 // Active section in the nav
 const links = Object.fromEntries($$("nav a").map(a => [a.getAttribute("href").slice(1), a]));
