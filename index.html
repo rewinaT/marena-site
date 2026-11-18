@@ -166,6 +166,24 @@
   .contact .btn.ghost { color: #fff; border-color: #fff; }
   .contact .btn.ghost:hover { background: #fff; color: var(--ink); }
   .contact .btn:focus-visible, .contact a:focus-visible { outline-color: #7fb2ea; }
+  .enquiry { background: #171c22; border: 1px solid #2a323b; padding: 32px; margin: 0 0 56px; max-width: 820px; }
+  .enquiry h3 { font-size: 22px; font-weight: 800; letter-spacing: 0; text-transform: none; color: #fff; margin: 0 0 6px; }
+  .enquiry > p { color: #b8c2cc; margin: 0 0 24px; font-size: 15.5px; }
+  .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 20px; }
+  .field { display: flex; flex-direction: column; gap: 7px; }
+  .field.wide { grid-column: 1 / -1; }
+  .field label { font-size: 14px; font-weight: 600; color: #dfe5eb; }
+  .field label i { font-style: normal; color: #7fb2ea; }
+  .field input, .field select, .field textarea {
+    font: inherit; font-size: 16px; color: #fff; background: #0f1317; border: 1.5px solid #3a444f; padding: 12px 14px; width: 100%; border-radius: 0;
+    transition: border-color .2s, background .2s;
+  }
+  .field textarea { min-height: 110px; resize: vertical; }
+  .field input:hover, .field select:hover, .field textarea:hover { border-color: #5b6875; }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: #7fb2ea; background: #131920; }
+  .enquiry .send { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 24px; }
+  button.btn { font-family: inherit; cursor: pointer; }
+  .enquiry .note { margin: 16px 0 0; font-size: 13.5px; color: #98a4b0; }
   .hours { margin: 12px 0 0; color: #dfe5eb; }
   .dir { display: inline-block; margin-top: 14px; color: #7fb2ea; font-weight: 600; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .2s, color .2s; }
   .dir:hover { border-color: #7fb2ea; color: #a9cdf5; }
@@ -328,6 +346,8 @@
     .fact:nth-child(n+3) { border-top: 1px solid rgba(255,255,255,.28); }
     .fact b { font-size: 30px; }
     .about, .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+    .fields { grid-template-columns: 1fr; }
+    .enquiry { padding: 24px 20px; }
     .about figure { max-width: 380px; }
     .services { grid-template-columns: 1fr; }
     .gallery { grid-template-columns: repeat(2, 1fr); gap: 10px; }
@@ -497,6 +517,43 @@
         <a class="btn" href="https://wa.me/251911714355" target="_blank" rel="noopener" data-i18n="ct_wa">Chat on WhatsApp</a>
         <a class="btn ghost" href="https://t.me/+251911714355" target="_blank" rel="noopener" data-i18n="ct_tg">Message on Telegram</a>
       </div>
+      <form class="enquiry" id="enquiry" novalidate>
+        <h3 data-i18n="enq_title">Request a consultation</h3>
+        <p data-i18n="enq_sub">Tell us about your building and we will get back to you.</p>
+        <div class="fields">
+          <div class="field">
+            <label for="f-name"><span data-i18n="f_name">Full name</span> <i aria-hidden="true">*</i></label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="f-phone"><span data-i18n="f_phone">Phone number</span> <i aria-hidden="true">*</i></label>
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
+          </div>
+          <div class="field">
+            <label for="f-bld" data-i18n="f_bld">Building name and location</label>
+            <input id="f-bld" name="building" type="text">
+          </div>
+          <div class="field">
+            <label for="f-svc" data-i18n="f_svc">Service you need</label>
+            <select id="f-svc" name="service">
+              <option value="Not sure yet" data-i18n="o_any">Not sure yet</option>
+              <option value="Organising" data-i18n="o_1">Organising</option>
+              <option value="Leasing and sales" data-i18n="o_2">Leasing and sales</option>
+              <option value="Consulting" data-i18n="o_3">Consulting</option>
+              <option value="Management" data-i18n="o_4">Management</option>
+            </select>
+          </div>
+          <div class="field wide">
+            <label for="f-msg" data-i18n="f_msg">Message</label>
+            <textarea id="f-msg" name="message"></textarea>
+          </div>
+        </div>
+        <div class="send">
+          <button class="btn" type="submit" data-via="mail" data-i18n="b_mail">Send by email</button>
+          <button class="btn ghost" type="submit" data-via="wa" data-i18n="b_wa">Send on WhatsApp</button>
+        </div>
+        <p class="note" data-i18n="enq_note">Your email or WhatsApp opens with the enquiry filled in. Nothing is sent until you press send there.</p>
+      </form>
       <div class="contact-grid">
         <div>
           <h3 data-i18n="ct_phone">Phone</h3>
@@ -584,6 +641,11 @@ const am = {
   skip: "ወደ ዋናው ይዘት ይለፉ",
   ct_wa: "በዋትስአፕ ያነጋግሩን", ct_tg: "በቴሌግራም ይፃፉልን", ct_dir: "አቅጣጫ ይመልከቱ",
   ct_hours: "የስራ ሰዓት፦ ከጠዋቱ 1፡00 እስከ ምሽቱ 1፡00",
+  enq_title: "የምክክር ቀጠሮ ይጠይቁ", enq_sub: "ስለ ህንፃዎ ይንገሩን፤ እኛም መልሰን እናገኝዎታለን።",
+  f_name: "ሙሉ ስም", f_phone: "ስልክ ቁጥር", f_bld: "የህንፃው ስምና አድራሻ", f_svc: "የሚፈልጉት አገልግሎት", f_msg: "መልእክት",
+  o_any: "ገና አልወሰንኩም", o_1: "ማደራጀት", o_2: "ማከራየትና ሽያጭ", o_3: "ማማከር", o_4: "ማስተዳደር",
+  b_mail: "በኢሜል ይላኩ", b_wa: "በዋትስአፕ ይላኩ",
+  enq_note: "ጥያቄዎ ተሞልቶ ኢሜልዎ ወይም ዋትስአፕዎ ይከፈታል። እዚያ «ላክ» እስኪጫኑ ድረስ ምንም አይላክም።",
   l_lang: "ቋንቋ", l_menu: "ማውጫ", l_top: "ወደ ላይ ይመለሱ",
   a_hero: "ዴማ ሆፕ ሪል እስቴት፣ ሲግናል የሚገኝ 3B+G+21 የንግድና የመኖሪያ አፓርትመንት ህንፃ",
   a_about: "ዴማ ሆፕ ሪል እስቴት ህንፃ",
@@ -696,6 +758,7 @@ const $$ = s => [...document.querySelectorAll(s)];
   [".gallery figure", 90, "zoom"],
   [".list-title, .list-note", 0],
   [".contact .eyebrow, .contact h2, .contact .sub", 90],
+  [".enquiry", 0],
   [".contact-grid > div", 120]
 ].forEach(([sel, step, variant]) => $$(sel).forEach((el, i) => {
   el.classList.add("reveal");
@@ -753,6 +816,23 @@ addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false, true);
 // close when clicking or tabbing outside the header
 addEventListener("click", e => { if (!e.target.closest("header")) setMenu(false); });
 head.addEventListener("focusout", e => { if (e.relatedTarget && !head.contains(e.relatedTarget)) setMenu(false); });
+
+// Enquiry form: opens the visitor's own email or WhatsApp with the details filled in
+const enquiry = document.getElementById("enquiry");
+enquiry.addEventListener("submit", e => {
+  e.preventDefault();
+  if (!enquiry.reportValidity()) return;
+  const f = enquiry.elements, v = n => f[n].value.trim();
+  const lines = ["Consultation request from marenaproperties.net", "", "Name: " + v("name"), "Phone: " + v("phone")];
+  if (v("building")) lines.push("Building: " + v("building"));
+  lines.push("Service: " + v("service"));
+  if (v("message")) lines.push("", "Message:", v("message"));
+  const text = lines.join("\n");
+  if (e.submitter && e.submitter.dataset.via === "wa")
+    window.open("https://wa.me/251911714355?text=" + encodeURIComponent(text), "_blank", "noopener");
+  else
+    location.href = "mailto:info@marenaproperties.net?subject=" + encodeURIComponent("Consultation request from " + v("name")) + "&body=" + encodeURIComponent(text);
+});
 
 // Active section in the nav
 const links = Object.fromEntries($$("nav a").map(a => [a.getAttribute("href").slice(1), a]));
