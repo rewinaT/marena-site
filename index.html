@@ -134,15 +134,54 @@
   .service li::before { content: ""; position: absolute; left: 0; top: .62em; width: 8px; height: 8px; background: var(--blue); clip-path: polygon(0 0, 100% 50%, 0 100%); }
   .service::after { content: ""; position: absolute; right: 0; top: 0; width: 34px; height: 34px; background: var(--blue); clip-path: polygon(100% 0, 100% 100%, 0 0); }
 
-  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 72px; }
-  .gallery figure { margin: 0; position: relative; overflow: hidden; background: var(--ink); }
-  .gallery img { width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: center top; transition: transform .4s; }
-  .gallery figure:hover img { transform: scale(1.04); }
-  .gallery figcaption {
-    position: absolute; left: 0; right: 0; bottom: 0; padding: 44px 16px 14px; color: #fff; font-weight: 700; font-size: 17px;
-    background: linear-gradient(transparent, rgba(8,12,18,.85));
-  }
-  .gallery figcaption small { display: block; font-weight: 500; font-size: 13.5px; opacity: .85; }
+  /* Clients gallery: bento grid */
+  .gallery { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 250px; gap: 14px; margin-bottom: 72px; }
+  .gallery .t1 { grid-column: 1 / 3; grid-row: 1 / 3; }
+  .gallery .t2 { grid-column: 3 / 5; }
+  .gallery .g-cta { grid-column: 3 / 5; }
+  .gallery figure { margin: 0; position: relative; overflow: hidden; background: var(--ink); isolation: isolate; }
+  .gallery picture { display: block; height: 100%; }
+  .gallery img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; filter: saturate(.95); transition: transform .8s var(--ease), filter .5s; }
+  .gallery .t1 img { animation: kb 16s ease-in-out infinite alternate; }
+  @keyframes kb { from { scale: 1; translate: 0 0; } to { scale: 1.09; translate: 0 -2.5%; } }
+  .gallery figure:hover img { transform: scale(1.07); filter: saturate(1.12); }
+  @media (hover: hover) { .gallery:hover figure:not(:hover) img { filter: brightness(.62) saturate(.6); } }
+  .gallery figure::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(8,12,18,.35) 0, transparent 30%, transparent 48%, rgba(8,12,18,.88) 100%); }
+  .gallery figure::after { content: ""; position: absolute; left: 0; bottom: 0; z-index: 2; height: 4px; width: 100%; background: var(--blue); transform: scaleX(0); transform-origin: 0 50%; transition: transform .5s var(--ease); }
+  .gallery figure:hover::after { transform: scaleX(1); }
+  .gallery .num { position: absolute; top: 12px; right: 16px; z-index: 2; font-size: 40px; font-weight: 800; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,.75); transition: color .4s, transform .5s var(--ease); }
+  .gallery figure:hover .num { color: #fff; transform: translateY(-3px); }
+  .gallery .t1 .num { font-size: 64px; }
+  .gallery .tag { position: absolute; top: 16px; left: 16px; z-index: 2; display: inline-flex; align-items: center; gap: 7px; font-style: normal; font-size: 12.5px; font-weight: 700; letter-spacing: .02em; padding: 5px 10px; background: rgba(255,255,255,.92); color: var(--ink); }
+  .gallery .tag.cur { background: var(--blue); color: #fff; }
+  .gallery .tag.cur::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #7dffb0; box-shadow: 0 0 0 0 rgba(125,255,176,.7); animation: ping 2s infinite; }
+  @keyframes ping { 70% { box-shadow: 0 0 0 7px rgba(125,255,176,0); } 100% { box-shadow: 0 0 0 0 rgba(125,255,176,0); } }
+  .gallery figcaption { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 0 18px 18px; color: #fff; font-weight: 800; font-size: 19px; line-height: 1.25; transition: transform .45s var(--ease); }
+  .gallery .t1 figcaption { font-size: 28px; padding: 0 26px 26px; }
+  .gallery figcaption small { display: flex; align-items: center; gap: 6px; margin-top: 4px; font-weight: 500; font-size: 14px; opacity: .88; }
+  .gallery figcaption small::before { content: ""; width: 9px; height: 9px; background: var(--blue); clip-path: polygon(0 0, 100% 50%, 0 100%); transition: transform .35s var(--ease); }
+  .gallery figure:hover figcaption { transform: translateY(-8px); }
+  .gallery figure:hover figcaption small::before { transform: translateX(4px); }
+
+  .g-cta { position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; padding: 26px 28px; color: #fff; text-decoration: none;
+    background: repeating-linear-gradient(135deg, rgba(255,255,255,.07) 0 2px, transparent 2px 22px), linear-gradient(135deg, var(--blue), var(--blue-deep)); background-size: 62px 62px, 100% 100%;
+    animation: drift 6s linear infinite; transition: box-shadow .35s, transform .35s var(--ease); }
+  @keyframes drift { to { background-position: 62px 0, 0 0; } }
+  .g-cta:hover { transform: translateY(-4px); box-shadow: 0 22px 44px rgba(30,99,176,.35); }
+  .g-count { display: flex; align-items: baseline; gap: 10px; font-size: 15px; font-weight: 600; opacity: .9; }
+  .g-count b { font-size: 46px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+  .g-cta strong { font-size: 26px; font-weight: 800; line-height: 1.2; }
+  .g-go { display: inline-flex; align-items: center; gap: 10px; align-self: flex-start; font-weight: 700; background: #fff; color: var(--blue); padding: 11px 18px; }
+  .g-go i { font-style: normal; transition: transform .3s var(--ease); }
+  .g-cta:hover .g-go i { transform: translateX(6px); }
+
+  /* gallery reveal: curtain wipe with image settling */
+  .js .reveal[data-r="wipe"] { opacity: 1; transform: none; clip-path: inset(100% 0 0 0); transition: clip-path 1s var(--ease) var(--d, 0ms); }
+  .js .reveal[data-r="wipe"] img { transform: scale(1.3); transition: transform 1.2s var(--ease) var(--d, 0ms); }
+  .js .reveal[data-r="wipe"] figcaption, .js .reveal[data-r="wipe"] .tag, .js .reveal[data-r="wipe"] > span, .js .reveal[data-r="wipe"] > strong { opacity: 0; transform: translateY(16px); transition: opacity .6s, transform .7s var(--ease); transition-delay: calc(var(--d, 0ms) + 450ms); }
+  .js .reveal.in[data-r="wipe"] { clip-path: inset(0 0 0 0); }
+  .js .reveal.in[data-r="wipe"] img { transform: none; }
+  .js .reveal.in[data-r="wipe"] figcaption, .js .reveal.in[data-r="wipe"] .tag, .js .reveal.in[data-r="wipe"] > span, .js .reveal.in[data-r="wipe"] > strong { opacity: 1; transform: none; }
 
   h3.list-title { font-size: 22px; font-weight: 800; margin: 0 0 6px; }
   .list-note { color: var(--ink-soft); margin: 0 0 20px; font-size: 15.5px; }
@@ -289,12 +328,6 @@
   .service li::before { transition: transform .25s var(--ease); }
   .service li:hover::before { transform: translateX(4px); }
 
-  .gallery img { transition: transform .7s var(--ease), filter .5s; filter: saturate(.92); }
-  .gallery figure:hover img { transform: scale(1.07); filter: saturate(1.1); }
-  .gallery figcaption { transition: padding-bottom .35s var(--ease); }
-  .gallery figure:hover figcaption { padding-bottom: 24px; }
-  .gallery figure::after { content: ""; position: absolute; left: 0; bottom: 0; height: 4px; width: 100%; background: var(--blue); transform: scaleX(0); transform-origin: 0 50%; transition: transform .45s var(--ease); }
-  .gallery figure:hover::after { transform: scaleX(1); }
 
   .clients li { transition: background .25s, padding .3s var(--ease), box-shadow .25s; }
   .clients li:hover { background: var(--blue-tint); padding-left: 16px; padding-right: 8px; box-shadow: inset 4px 0 0 var(--blue); }
@@ -320,6 +353,8 @@
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation: none !important; transition: none !important; }
     .js .reveal, .js .hero-copy > *, .js .clients li { opacity: 1 !important; transform: none !important; }
+    .js .reveal[data-r="wipe"] { clip-path: none !important; }
+    .js .reveal[data-r="wipe"] * { opacity: 1 !important; transform: none !important; }
     .hero-art img { transform: none; }
   }
 
@@ -356,7 +391,11 @@
     .enquiry { padding: 24px 20px; }
     .about figure { max-width: 380px; }
     .services { grid-template-columns: 1fr; }
-    .gallery { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 230px; gap: 10px; }
+    .gallery .t1 { grid-column: 1 / 3; grid-row: span 2; }
+    .gallery .t2, .gallery .g-cta { grid-column: 1 / 3; }
+    .gallery .t1 figcaption { font-size: 23px; padding: 0 18px 18px; }
+    .gallery .t1 .num { font-size: 48px; }
     .clients li { grid-template-columns: 1fr; gap: 3px; }
     section { padding: 68px 0; }
   }
@@ -365,7 +404,13 @@
     .hero-art { margin: 0 -16px; }
     .brand img { height: 38px; }
     .service { padding: 28px 22px 30px; }
-    .gallery figcaption { font-size: 15px; padding: 36px 10px 10px; }
+    .gallery { grid-auto-rows: 200px; }
+    .gallery figcaption { font-size: 15.5px; padding: 0 12px 12px; }
+    .gallery figcaption small { font-size: 13px; }
+    .gallery .tag { top: 10px; left: 10px; font-size: 11px; padding: 4px 8px; }
+    .gallery .num { font-size: 30px; top: 8px; right: 10px; }
+    .g-cta { padding: 22px 20px; }
+    .g-cta strong { font-size: 22px; }
   }
 </style>
 </head>
@@ -505,12 +550,17 @@
       <p class="sub" data-i18n="cl_sub">Some of the buildings in Addis Ababa that Marena and its professionals serve or have served.</p>
 
       <div class="gallery">
-        <figure><picture><source srcset="assets/dema-aerial.webp" type="image/webp"><img src="assets/dema-aerial.jpg" width="1000" height="1250" loading="lazy" data-i18n-alt="a_g1" alt="Aerial view of the Dema Hope Real Estate tower"></picture><figcaption><span data-i18n="g1">Dema Hope Real Estate</span><small data-i18n="g1w">Signal</small></figcaption></figure>
-        <figure><picture><source srcset="assets/zefmesh.webp" type="image/webp"><img src="assets/zefmesh.jpg" width="970" height="678" loading="lazy" data-i18n-alt="a_g2" alt="Exterior of Zefmesh Grand Mall"></picture><figcaption><span data-i18n="g2">Zefmesh Grand Mall</span><small data-i18n="g2w">Megenagna</small></figcaption></figure>
-        <figure><picture><source srcset="assets/merkeb.webp" type="image/webp"><img src="assets/merkeb.jpg" width="843" height="1280" loading="lazy" data-i18n-alt="a_g3" alt="Exterior of Merkeb Plaza"></picture><figcaption><span data-i18n="g3">Merkeb Plaza</span><small data-i18n="g3w">Olympia</small></figcaption></figure>
-        <figure><picture><source srcset="assets/salam.webp" type="image/webp"><img src="assets/salam.jpg" width="638" height="1000" loading="lazy" data-i18n-alt="a_g4" alt="Exterior of Selam City Mall"></picture><figcaption><span data-i18n="g4">Selam City Mall</span><small data-i18n="g4w">Bole</small></figcaption></figure>
-        <figure><picture><source srcset="assets/smart.webp" type="image/webp"><img src="assets/smart.jpg" width="327" height="690" loading="lazy" data-i18n-alt="a_g5" alt="Exterior of Smart Plaza"></picture><figcaption><span data-i18n="g5">Smart Plaza</span><small data-i18n="g5w">Lideta</small></figcaption></figure>
-        <figure><picture><source srcset="assets/tewedaj.webp" type="image/webp"><img src="assets/tewedaj.jpg" width="387" height="600" loading="lazy" data-i18n-alt="a_g6" alt="Exterior of Tewedaj Building"></picture><figcaption><span data-i18n="g6">Tewedaj Building</span><small data-i18n="g6w">Gurd Shola</small></figcaption></figure>
+        <figure class="t1"><picture><source srcset="assets/dema-aerial.webp" type="image/webp"><img src="assets/dema-aerial.jpg" width="1000" height="1250" loading="lazy" data-i18n-alt="a_g1" alt="Aerial view of the Dema Hope Real Estate tower"></picture><b class="num" aria-hidden="true">01</b><em class="tag cur" data-i18n="tag_cur">Current client</em><figcaption><span data-i18n="g1">Dema Hope Real Estate</span><small data-i18n="g1w">Signal</small></figcaption></figure>
+        <figure class="t2"><picture><source srcset="assets/zefmesh.webp" type="image/webp"><img src="assets/zefmesh.jpg" width="970" height="678" loading="lazy" data-i18n-alt="a_g2" alt="Exterior of Zefmesh Grand Mall"></picture><b class="num" aria-hidden="true">02</b><em class="tag" data-i18n="tag_past">Past client</em><figcaption><span data-i18n="g2">Zefmesh Grand Mall</span><small data-i18n="g2w">Megenagna</small></figcaption></figure>
+        <figure class="t3"><picture><source srcset="assets/merkeb.webp" type="image/webp"><img src="assets/merkeb.jpg" width="843" height="1280" loading="lazy" data-i18n-alt="a_g3" alt="Exterior of Merkeb Plaza"></picture><b class="num" aria-hidden="true">03</b><em class="tag" data-i18n="tag_past">Past client</em><figcaption><span data-i18n="g3">Merkeb Plaza</span><small data-i18n="g3w">Olympia</small></figcaption></figure>
+        <figure class="t4"><picture><source srcset="assets/salam.webp" type="image/webp"><img src="assets/salam.jpg" width="638" height="1000" loading="lazy" data-i18n-alt="a_g4" alt="Exterior of Selam City Mall"></picture><b class="num" aria-hidden="true">04</b><em class="tag" data-i18n="tag_past">Past client</em><figcaption><span data-i18n="g4">Selam City Mall</span><small data-i18n="g4w">Bole</small></figcaption></figure>
+        <figure class="t5"><picture><source srcset="assets/smart.webp" type="image/webp"><img src="assets/smart.jpg" width="654" height="1380" loading="lazy" data-i18n-alt="a_g5" alt="Exterior of Smart Plaza"></picture><b class="num" aria-hidden="true">05</b><em class="tag" data-i18n="tag_past">Past client</em><figcaption><span data-i18n="g5">Smart Plaza</span><small data-i18n="g5w">Lideta</small></figcaption></figure>
+        <figure class="t6"><picture><source srcset="assets/tewedaj.webp" type="image/webp"><img src="assets/tewedaj.jpg" width="774" height="1200" loading="lazy" data-i18n-alt="a_g6" alt="Exterior of Tewedaj Building"></picture><b class="num" aria-hidden="true">06</b><em class="tag cur" data-i18n="tag_cur">Current client</em><figcaption><span data-i18n="g6">Tewedaj Building</span><small data-i18n="g6w">Gurd Shola</small></figcaption></figure>
+        <a class="g-cta" href="#enquiry">
+          <span class="g-count"><b data-count="45" data-suffix="+">45+</b><span data-i18n="fact2">Buildings served</span></span>
+          <strong data-i18n="gcta_t">Is your building next?</strong>
+          <span class="g-go"><span data-i18n="gcta_b">Request a consultation</span> <i aria-hidden="true">&rarr;</i></span>
+        </a>
       </div>
 
       <h3 class="list-title" data-i18n="cur_title">Currently serving</h3>
@@ -650,6 +700,7 @@ const am = {
   cl_sub: "ማሪና እና ባለሙያዎቹ በአዲስ አበባ አገልግሎት ከሚሰጧቸውና ከሰጧቸው ህንፃዎች መካከል።",
   g1: "ዴማ ሆፕ ሪል እስቴት", g1w: "ሲግናል", g2: "ዘፍመሽ ግራንድ ሞል", g2w: "መገናኛ", g3: "መርከብ ፕላዛ", g3w: "ኦሎምፒያ",
   g4: "ሰላም ሲቲ ሞል", g4w: "ቦሌ", g5: "ስማርት ፕላዛ", g5w: "ልደታ", g6: "ተወዳጅ ህንፃ", g6w: "ጉርድ ሾላ",
+  tag_cur: "የአሁን ደንበኛ", tag_past: "የቀድሞ ደንበኛ", gcta_t: "ቀጣዩ ህንፃ የእርስዎ ይሆን?", gcta_b: "የምክክር ቀጠሮ ይጠይቁ",
   cur_title: "አሁን አገልግሎት እየሰጠናቸው ያሉ", cur_note: "ድርጅታችን አሁን አገልግሎት እየሰጣቸው ካሉ ደንበኞች መካከል።",
   past_title: "ቀደም ሲል አገልግሎት የሰጠናቸው", past_note: "የድርጅቱ ባለሙያዎች ቀደም ሲል አገልግሎት ከሰጧቸው ደንበኞች መካከል።",
   ct_eyebrow: "አድራሻ",
@@ -775,7 +826,7 @@ const $$ = s => [...document.querySelectorAll(s)];
   ["#services .eyebrow, #services h2, #services .sub", 90],
   [".service", 110],
   ["#clients > .wrap > .eyebrow, #clients h2, #clients .sub", 90],
-  [".gallery figure", 90, "zoom"],
+  [".gallery > *", 100, "wipe"],
   [".list-title, .list-note", 0],
   [".contact .eyebrow, .contact h2, .contact .sub", 90],
   [".enquiry", 0],
@@ -791,10 +842,21 @@ const io = new IntersectionObserver(es => es.forEach(e => {
   el.classList.add("in");
   // once revealed, drop the reveal transition so hover effects use their own timing
   if (el.classList.contains("reveal")) setTimeout(() => el.classList.remove("reveal"), 1800);
-  if (e.target.classList.contains("fact")) countUp(e.target.querySelector("[data-count]"));
+  if (e.target.matches(".fact, .g-cta")) countUp(e.target.querySelector("[data-count]"));
   io.unobserve(e.target);
 }), { threshold: 0.15, rootMargin: "0px 0px -6% 0px" });
-$$(".reveal, .clients").forEach(el => io.observe(el));
+$$(".reveal, .clients").forEach(el => { if (!el.matches(".gallery > *")) io.observe(el); });
+// gallery tiles start fully clipped, which hides them from the observer, so watch the grid instead
+const gio = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  [...e.target.children].forEach(el => {
+    el.classList.add("in");
+    if (el.matches(".g-cta")) countUp(el.querySelector("[data-count]"));
+    setTimeout(() => el.classList.remove("reveal"), 2000);
+  });
+  gio.unobserve(e.target);
+}), { threshold: 0.12 });
+$$(".gallery").forEach(g => gio.observe(g));
 
 function countUp(b) {
   if (!b || calm) return;
