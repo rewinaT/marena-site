@@ -229,6 +229,8 @@
   .enquiry .send { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 24px; }
   button.btn { font-family: inherit; cursor: pointer; }
   .enquiry .note { margin: 16px 0 0; font-size: 13.5px; color: #98a4b0; }
+  .enquiry .h-captcha { margin-top: 22px; min-height: 78px; }
+  @media (max-width: 374px) { .enquiry .h-captcha { transform: scale(.88); transform-origin: 0 0; margin-bottom: -10px; } }
   .enquiry .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
   .enquiry .status { margin: 18px 0 0; font-size: 15px; font-weight: 600; color: #dfe5eb; }
   .enquiry .status:empty, .enquiry .status:not(:has(span:not([hidden]))) { margin: 0; }
@@ -621,11 +623,12 @@
           </div>
         </div>
         <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="h-captcha" data-captcha="true" data-theme="dark"></div>
         <div class="send">
           <button class="btn" type="submit" data-via="web" data-i18n="b_send">Send request</button>
           <button class="btn ghost" type="submit" data-via="wa" data-i18n="b_wa">Send on WhatsApp</button>
         </div>
-        <p class="status" role="status" aria-live="polite"><span data-i18n="s_sending" hidden>Sending your request…</span><span class="ok" data-i18n="s_ok" hidden>Thank you. Your request has been sent and we will contact you soon.</span><span class="err" data-i18n="s_err" hidden>Sorry, your request could not be sent. Please try again, send it on WhatsApp, or call +251 911 714355.</span></p>
+        <p class="status" role="status" aria-live="polite"><span data-i18n="s_sending" hidden>Sending your request…</span><span class="ok" data-i18n="s_ok" hidden>Thank you. Your request has been sent and we will contact you soon.</span><span class="err" data-i18n="s_cap" hidden>Please tick the "I am human" box before sending.</span><span class="err" data-i18n="s_err" hidden>Sorry, your request could not be sent. Please try again, send it on WhatsApp, or call +251 911 714355.</span></p>
         <p class="note" data-i18n="enq_note">Your request comes straight to our team. Prefer to chat? Send it on WhatsApp instead.</p>
       </form>
       <div class="contact-grid">
@@ -728,6 +731,7 @@ const am = {
   v_phone: "እባክዎ ትክክለኛ ስልክ ቁጥር ያስገቡ፤ ለምሳሌ 0911 714355 ወይም +251 911 714355።",
   v_link: "እባክዎ ከመልዕክትዎ ውስጥ የድረ-ገጽ ሊንኮችን ያስወግዱ።",
   s_sending: "ጥያቄዎ በመላክ ላይ ነው…", s_ok: "እናመሰግናለን። ጥያቄዎ ተልኳል፤ በቅርቡ እናገኝዎታለን።",
+  s_cap: "እባክዎ ከመላክዎ በፊት «I am human» የሚለውን ሳጥን ምልክት ያድርጉ።",
   s_err: "ይቅርታ፣ ጥያቄዎን መላክ አልተቻለም። እባክዎ እንደገና ይሞክሩ፣ በዋትስአፕ ይላኩ ወይም በ+251 911 714355 ይደውሉ።",
   enq_note: "ጥያቄዎ በቀጥታ ለቡድናችን ይደርሳል። በቻት መነጋገር ከፈለጉ በዋትስአፕ ይላኩ።",
   l_lang: "ቋንቋ", l_menu: "ማውጫ", l_top: "ወደ ላይ ይመለሱ",
@@ -945,13 +949,15 @@ enquiry.addEventListener("submit", async e => {
   }
   // bots tick the hidden box or submit instantly: pretend it worked, send nothing
   if (f.botcheck.checked || Date.now() - loadedAt < 3000) { show("s_ok"); enquiry.reset(); return; }
+  const captcha = enquiry.querySelector('[name="h-captcha-response"]');
+  if (!captcha || !captcha.value) { show("s_cap"); return; }
   sendBtn.disabled = true; show("s_sending");
   try {
     const r = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify({
-        access_key: W3F_KEY, botcheck: f.botcheck.checked,
+        access_key: W3F_KEY, botcheck: f.botcheck.checked, "h-captcha-response": captcha.value,
         subject: "Consultation request from " + v("name"),
         from_name: "Marena website",
         Name: v("name"), Phone: v("phone"), Building: v("building") || "-", Service: v("service"),
@@ -965,6 +971,7 @@ enquiry.addEventListener("submit", async e => {
     show("s_err");
   } finally {
     sendBtn.disabled = false;
+    try { window.hcaptcha && hcaptcha.reset(); } catch (e) {} // each token works once
   }
 });
 
@@ -975,5 +982,6 @@ const spy = new IntersectionObserver(es => es.forEach(e => {
 }), { rootMargin: "-45% 0px -50% 0px" });
 $$("main section[id]").forEach(s => spy.observe(s));
 </script>
+<script src="https://web3forms.com/client/script.js" async defer></script>
 </body>
 </html>
