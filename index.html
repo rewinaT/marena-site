@@ -229,6 +229,13 @@
   .enquiry .send { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 24px; }
   button.btn { font-family: inherit; cursor: pointer; }
   .enquiry .note { margin: 16px 0 0; font-size: 13.5px; color: #98a4b0; }
+  .enquiry .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  .enquiry .status { margin: 18px 0 0; font-size: 15px; font-weight: 600; color: #dfe5eb; }
+  .enquiry .status:empty, .enquiry .status:not(:has(span:not([hidden]))) { margin: 0; }
+  .enquiry .status .ok { display: block; color: #7dffb0; padding: 12px 14px; border-left: 4px solid #7dffb0; background: rgba(125,255,176,.08); }
+  .enquiry .status .err { display: block; color: #ffb3b3; padding: 12px 14px; border-left: 4px solid #ff8a8a; background: rgba(255,138,138,.08); }
+  .enquiry .status [hidden] { display: none; }
+  .enquiry button[disabled] { opacity: .6; cursor: progress; }
   .hours { margin: 12px 0 0; color: #dfe5eb; }
   .dir { display: inline-block; margin-top: 14px; color: #7fb2ea; font-weight: 600; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .2s, color .2s; }
   .dir:hover { border-color: #7fb2ea; color: #a9cdf5; }
@@ -613,11 +620,13 @@
             <textarea id="f-msg" name="message"></textarea>
           </div>
         </div>
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="send">
-          <button class="btn" type="submit" data-via="mail" data-i18n="b_mail">Send by email</button>
+          <button class="btn" type="submit" data-via="web" data-i18n="b_send">Send request</button>
           <button class="btn ghost" type="submit" data-via="wa" data-i18n="b_wa">Send on WhatsApp</button>
         </div>
-        <p class="note" data-i18n="enq_note">Your email or WhatsApp opens with the enquiry filled in. Nothing is sent until you press send there.</p>
+        <p class="status" role="status" aria-live="polite"><span data-i18n="s_sending" hidden>Sending your request…</span><span class="ok" data-i18n="s_ok" hidden>Thank you. Your request has been sent and we will contact you soon.</span><span class="err" data-i18n="s_err" hidden>Sorry, your request could not be sent. Please try again, send it on WhatsApp, or call +251 911 714355.</span></p>
+        <p class="note" data-i18n="enq_note">Your request comes straight to our team. Prefer to chat? Send it on WhatsApp instead.</p>
       </form>
       <div class="contact-grid">
         <div>
@@ -715,8 +724,10 @@ const am = {
   enq_title: "የምክክር ቀጠሮ ይጠይቁ", enq_sub: "ስለ ህንፃዎ ይንገሩን፤ እኛም መልሰን እናገኝዎታለን።",
   f_name: "ሙሉ ስም", f_phone: "ስልክ ቁጥር", f_bld: "የህንፃው ስምና አድራሻ", f_svc: "የሚፈልጉት አገልግሎት", f_msg: "መልእክት",
   o_any: "ገና አልወሰንኩም", o_1: "ማደራጀት", o_2: "ማከራየትና ሽያጭ", o_3: "ማማከር", o_4: "ማስተዳደር",
-  b_mail: "በኢሜል ይላኩ", b_wa: "በዋትስአፕ ይላኩ",
-  enq_note: "ጥያቄዎ ተሞልቶ ኢሜልዎ ወይም ዋትስአፕዎ ይከፈታል። እዚያ «ላክ» እስኪጫኑ ድረስ ምንም አይላክም።",
+  b_send: "ጥያቄውን ይላኩ", b_wa: "በዋትስአፕ ይላኩ",
+  s_sending: "ጥያቄዎ በመላክ ላይ ነው…", s_ok: "እናመሰግናለን። ጥያቄዎ ተልኳል፤ በቅርቡ እናገኝዎታለን።",
+  s_err: "ይቅርታ፣ ጥያቄዎን መላክ አልተቻለም። እባክዎ እንደገና ይሞክሩ፣ በዋትስአፕ ይላኩ ወይም በ+251 911 714355 ይደውሉ።",
+  enq_note: "ጥያቄዎ በቀጥታ ለቡድናችን ይደርሳል። በቻት መነጋገር ከፈለጉ በዋትስአፕ ይላኩ።",
   l_lang: "ቋንቋ", l_menu: "ማውጫ", l_top: "ወደ ላይ ይመለሱ",
   a_hero: "ዴማ ሆፕ ሪል እስቴት፣ ሲግናል የሚገኝ 3B+G+21 የንግድና የመኖሪያ አፓርትመንት ህንፃ",
   a_about: "ዴማ ሆፕ ሪል እስቴት ህንፃ",
@@ -899,9 +910,12 @@ addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false, true);
 addEventListener("click", e => { if (!e.target.closest("header")) setMenu(false); });
 head.addEventListener("focusout", e => { if (e.relatedTarget && !head.contains(e.relatedTarget)) setMenu(false); });
 
-// Enquiry form: opens the visitor's own email or WhatsApp with the details filled in
+// Enquiry form: "Send request" delivers through Web3Forms to the company inbox; WhatsApp opens a prefilled chat
 const enquiry = document.getElementById("enquiry");
-enquiry.addEventListener("submit", e => {
+const W3F_KEY = "374d6c7a-27ed-47fb-aa2d-768056aea0c6"; // public form key, safe to ship in the page
+const formStatus = enquiry.querySelector(".status"), sendBtn = enquiry.querySelector('[data-via="web"]');
+const show = k => formStatus.querySelectorAll("span").forEach(s => s.hidden = !s.dataset.i18n || s.dataset.i18n !== k);
+enquiry.addEventListener("submit", async e => {
   e.preventDefault();
   if (!enquiry.reportValidity()) return;
   const f = enquiry.elements, v = n => f[n].value.trim();
@@ -910,10 +924,32 @@ enquiry.addEventListener("submit", e => {
   lines.push("Service: " + v("service"));
   if (v("message")) lines.push("", "Message:", v("message"));
   const text = lines.join("\n");
-  if (e.submitter && e.submitter.dataset.via === "wa")
+  if (e.submitter && e.submitter.dataset.via === "wa") {
     window.open("https://wa.me/251911714355?text=" + encodeURIComponent(text), "_blank", "noopener");
-  else
-    location.href = "mailto:info@marenaproperties.net?subject=" + encodeURIComponent("Consultation request from " + v("name")) + "&body=" + encodeURIComponent(text);
+    return;
+  }
+  if (f.botcheck.checked) return;
+  sendBtn.disabled = true; show("s_sending");
+  try {
+    const r = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({
+        access_key: W3F_KEY,
+        subject: "Consultation request from " + v("name"),
+        from_name: "Marena website",
+        Name: v("name"), Phone: v("phone"), Building: v("building") || "-", Service: v("service"),
+        Message: v("message") || "-", Language: document.documentElement.lang === "am" ? "Amharic" : "English"
+      })
+    });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok || !j.success) throw new Error(j.message || r.status);
+    show("s_ok"); enquiry.reset();
+  } catch (err) {
+    show("s_err");
+  } finally {
+    sendBtn.disabled = false;
+  }
 });
 
 // Active section in the nav
