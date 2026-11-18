@@ -26,7 +26,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preload" as="image" href="assets/dema-hope.webp" type="image/webp" fetchpriority="high">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "RealEstateAgent", "name": "Marena Property Solution PLC", "alternateName": "ማሪና ፕሮፐርቲ ሶልሺን ኃ/የተ/የግ/ማህበር", "description": "Building organising, leasing, sales, management and consultancy for commercial, office and residential apartment buildings in Addis Ababa.", "url": "https://marenaproperties.net/", "logo": "https://marenaproperties.net/assets/logo.png", "image": "https://marenaproperties.net/assets/share.jpg", "email": "info@marenaproperties.net", "telephone": ["+251911714355", "+251984202023"], "address": {"@type": "PostalAddress", "streetAddress": "22 Zurga Building, 3rd floor, office no. 35, Bole Woreda 4", "addressLocality": "Addis Ababa", "addressCountry": "ET"}, "areaServed": {"@type": "City", "name": "Addis Ababa"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "RealEstateAgent", "name": "Marena Property Solution PLC", "alternateName": "ማሪና ፕሮፐርቲ ሶልሽን ኃ/የተ/የግ/ማህበር", "description": "Building organising, leasing, sales, management and consultancy for commercial, office and residential apartment buildings in Addis Ababa.", "url": "https://marenaproperties.net/", "logo": "https://marenaproperties.net/assets/logo.png", "image": "https://marenaproperties.net/assets/share.jpg", "email": "info@marenaproperties.net", "telephone": ["+251911714355", "+251984202023"], "address": {"@type": "PostalAddress", "streetAddress": "22 Zurga Building, 3rd floor, office no. 35, Bole Woreda 4", "addressLocality": "Addis Ababa", "addressCountry": "ET"}, "taxID": "0094292383", "areaServed": {"@type": "City", "name": "Addis Ababa"}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..800&family=Noto+Sans+Ethiopic:wght@400..800&display=swap" rel="stylesheet">
@@ -112,6 +112,12 @@
   .about img { width: 100%; aspect-ratio: 4/5; object-fit: cover; clip-path: polygon(0 0, 82% 0, 100% 12%, 100% 100%, 0 100%); }
   .about figcaption { font-size: 13px; color: var(--ink-soft); margin-top: 28px; }
   .about p { color: var(--ink-soft); margin: 0 0 18px; }
+  .licence { margin: 28px 0 0; padding: 20px 22px; border: 1px solid var(--line); background: var(--paper); }
+  .licence h3 { font-size: 15px; font-weight: 700; margin: 0 0 10px; color: var(--ink); }
+  .licence ul { margin: 0 0 12px; padding: 0; list-style: none; }
+  .licence li { font-size: 15px; color: var(--ink-soft); padding-left: 18px; position: relative; margin-bottom: 6px; }
+  .licence li::before { content: ""; position: absolute; left: 0; top: .6em; width: 7px; height: 7px; background: var(--blue); clip-path: polygon(0 0, 100% 50%, 0 100%); }
+  .licence p { margin: 0; font-size: 13.5px; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
   .motto {
     margin: 32px 0 0; padding: 22px 26px; border-left: 6px solid var(--blue); background: var(--blue-tint);
     font-weight: 700; font-size: 20px; color: var(--blue-deep); line-height: 1.5;
@@ -426,6 +432,15 @@
         <p data-i18n="about_p1">Marena Property Solution works on commercial centres, office buildings, mixed-use buildings and residential apartments. We organise, lease, sell, manage and advise, for the whole building or part of it, according to what each owner asks for.</p>
         <p data-i18n="about_p2">Our professionals have served more than 45 small and large commercial, office and residential apartment buildings. We also carry out feasibility studies, market surveys, building management training and staff recruitment.</p>
         <p data-i18n="about_p3">Interior designers, marketing agencies, IT and communication, technical and maintenance, and research and survey professionals work with us as partners.</p>
+        <div class="licence">
+          <h3 data-i18n="lic_t">Licensed by the Addis Ababa City Administration Trade Bureau</h3>
+          <ul>
+            <li data-i18n="lic_1">Brokerage of immovable and special movable property</li>
+            <li data-i18n="lic_2">Renting and subletting of fixed property</li>
+            <li data-i18n="lic_3">Consultancy for economic development, business and investment</li>
+          </ul>
+          <p><span data-i18n="lic_tin">TIN</span> 0094292383 · <span data-i18n="lic_reg">Registration no.</span> BL/AA/2/0056185/2017</p>
+        </div>
         <p class="motto" lang="am">የእኛ ትጋት እርስዎ በስራዎ ውጤታማ እንደሆኑ ማድረግ ነው!!
           <small lang="en" data-i18n="motto_en">Our diligence is making sure you succeed in your work.</small>
         </p>
@@ -592,16 +607,21 @@ const am = {
   nav_about: "ስለ እኛ", nav_services: "አገልግሎቶች", nav_clients: "ደንበኞች", nav_contact: "አድራሻ",
   hero_eyebrow: "የህንፃ ማደራጀት፣ ማከራየት፣ ሽያጭ፣ ማስተዳደርና ማኔጅመንት አማካሪ",
   hero_title: "በ15 ዓመት ልምዳችንን ተጠቅመን ህንጻዎችን እናስተዳድራለን።",
-  hero_lede: "ማሪና ፕሮፐርቲ ሶልሺን ኃ/የተ/የግ/ማህበር በአዲስ አበባ የንግድ፣ የቢሮና የመኖሪያ አፓርትመንት ህንፃዎችን የማደራጀት፣ የማከራየት፣ የመሸጥ፣ የማስተዳደርና የማማከር ስራ ይሰራል።",
+  hero_lede: "ማሪና ፕሮፐርቲ ሶልሽን ኃ/የተ/የግ/ማህበር በአዲስ አበባ የንግድ፣ የቢሮና የመኖሪያ አፓርትመንት ህንፃዎችን የማደራጀት፣ የማከራየት፣ የመሸጥ፣ የማስተዳደርና የማማከር ስራ ይሰራል።",
   cta_talk: "ያነጋግሩን", cta_services: "አገልግሎቶቻችንን ይመልከቱ",
   fact1: "ዓመት ልምድ", fact2: "አገልግሎት ያገኙ ህንፃዎች", fact3: "በአገልግሎታችን ስር ያለ ረጅሙ ህንፃ", fact4: "በምናስተዳድራቸው ህንፃዎች የአገልግሎት ቁጥጥር",
   about_cap: "ዴማ ሆፕ ሪል እስቴት",
   about_eyebrow: "ስለ ድርጅታችን",
   about_title: "ማደራጀት፣ ማከራየት፣ መሸጥ፣ ማስተዳደርና ማማከር፤ በሙሉ ወይም በከፊል።",
-  about_p1: "ማሪና ፕሮፐርቲ ሶልሺን የንግድ ማዕከላትን፣ የቢሮ ህንፃዎችን፣ የቅይጥ አገልግሎት ህንፃዎችንና የመኖሪያ አፓርትመንቶችን በሙሉ ወይም በከፊል የማደራጀት፣ የማከራየት፣ የመሸጥ፣ የማስተዳደርና የማማከር ስራ በሚቀርበው የፍላጎት ጥያቄ መሰረት ይሰራል።",
+  about_p1: "ማሪና ፕሮፐርቲ ሶልሽን የንግድ ማዕከላትን፣ የቢሮ ህንፃዎችን፣ የቅይጥ አገልግሎት ህንፃዎችንና የመኖሪያ አፓርትመንቶችን በሙሉ ወይም በከፊል የማደራጀት፣ የማከራየት፣ የመሸጥ፣ የማስተዳደርና የማማከር ስራ በሚቀርበው የፍላጎት ጥያቄ መሰረት ይሰራል።",
   about_p2: "የድርጅቱ ባለሙያዎች ከ45 በላይ አነስተኛና ግዙፍ የንግድ፣ የቢሮና የመኖሪያ አፓርትመንት ህንፃዎችን በማደራጀት፣ በማከራየት፣ በማማከርና በማስተዳደር አገልግሎት ሲሰጡ ቆይተዋል። በተጨማሪም የአዋጭነት ጥናት፣ የገበያ ዳሰሳ ጥናት፣ የህንፃ ማኔጅመንት ስልጠና እና የሰራተኞች ቅጥር ስራዎችን እንሰራለን።",
   about_p3: "ዲዛይነሮች (Interior designers)፣ የማርኬቲንግ ኤጀንሲዎች፣ የአይቲና ኮሚኒኬሽን፣ የቴክኒክና ጥገና እንዲሁም የጥናትና የዳሰሳ ባለሙያዎች የድርጅቱ የስራ አጋር በመሆን አብረውን ይሰራሉ።",
   motto_en: "",
+  lic_t: "በአዲስ አበባ ከተማ አስተዳደር ንግድ ቢሮ ፈቃድ የተሰጠው",
+  lic_1: "የቋሚ እና ልዩ ተንቀሳቃሽ ንብረቶች የኮሚሽን/የአገናኝነት ስራ",
+  lic_2: "መኖሪያ ቤት እና ህንፃ (ቋሚ ንብረት) የማከራየት ስራ",
+  lic_3: "ኢኮኖሚ፣ ቢዝነስና ኢንቨስትመንት ልማት የማማከር አገልግሎት",
+  lic_tin: "የግብር ከፋይ መለያ ቁ.", lic_reg: "የንግድ ምዝገባ ቁ.",
   svc_eyebrow: "ድርጅታችን የሚሰጣቸው አገልግሎቶች",
   svc_title: "ለንግድ፣ ለቢሮና ለአፓርትመንት ህንፃዎች አራት አገልግሎቶች",
   svc_sub: "ስራችንን በሚታሰረው ውልና ስምምነት መሰረት በታማኝነት፣ በግልፅነትና በብቃት እንሰራለን።",
@@ -651,7 +671,7 @@ const am = {
   a_about: "ዴማ ሆፕ ሪል እስቴት ህንፃ",
   a_g1: "የዴማ ሆፕ ሪል እስቴት ህንፃ ከአየር ላይ ሲታይ", a_g2: "የዘፍመሽ ግራንድ ሞል ውጫዊ ገጽታ", a_g3: "የመርከብ ፕላዛ ውጫዊ ገጽታ",
   a_g4: "የሰላም ሲቲ ሞል ውጫዊ ገጽታ", a_g5: "የስማርት ፕላዛ ውጫዊ ገጽታ", a_g6: "የተወዳጅ ህንፃ ውጫዊ ገጽታ",
-  doc_title: "ማሪና ፕሮፐርቲ ሶልሺን ኃ/የተ/የግ/ማህበር | የህንፃ ማስተዳደር፣ ማከራየትና ሽያጭ በአዲስ አበባ"
+  doc_title: "ማሪና ፕሮፐርቲ ሶልሽን ኃ/የተ/የግ/ማህበር | የህንፃ ማስተዳደር፣ ማከራየትና ሽያጭ በአዲስ አበባ"
 };
 
 const USE = {
