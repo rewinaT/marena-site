@@ -725,6 +725,8 @@ const am = {
   f_name: "ሙሉ ስም", f_phone: "ስልክ ቁጥር", f_bld: "የህንፃው ስምና አድራሻ", f_svc: "የሚፈልጉት አገልግሎት", f_msg: "መልእክት",
   o_any: "ገና አልወሰንኩም", o_1: "ማደራጀት", o_2: "ማከራየትና ሽያጭ", o_3: "ማማከር", o_4: "ማስተዳደር",
   b_send: "ጥያቄውን ይላኩ", b_wa: "በዋትስአፕ ይላኩ",
+  v_phone: "እባክዎ ትክክለኛ ስልክ ቁጥር ያስገቡ፤ ለምሳሌ 0911 714355 ወይም +251 911 714355።",
+  v_link: "እባክዎ ከመልዕክትዎ ውስጥ የድረ-ገጽ ሊንኮችን ያስወግዱ።",
   s_sending: "ጥያቄዎ በመላክ ላይ ነው…", s_ok: "እናመሰግናለን። ጥያቄዎ ተልኳል፤ በቅርቡ እናገኝዎታለን።",
   s_err: "ይቅርታ፣ ጥያቄዎን መላክ አልተቻለም። እባክዎ እንደገና ይሞክሩ፣ በዋትስአፕ ይላኩ ወይም በ+251 911 714355 ይደውሉ።",
   enq_note: "ጥያቄዎ በቀጥታ ለቡድናችን ይደርሳል። በቻት መነጋገር ከፈለጉ በዋትስአፕ ይላኩ።",
@@ -915,10 +917,23 @@ const enquiry = document.getElementById("enquiry");
 const W3F_KEY = "374d6c7a-27ed-47fb-aa2d-768056aea0c6"; // public form key, safe to ship in the page
 const formStatus = enquiry.querySelector(".status"), sendBtn = enquiry.querySelector('[data-via="web"]');
 const show = k => formStatus.querySelectorAll("span").forEach(s => s.hidden = !s.dataset.i18n || s.dataset.i18n !== k);
+const enMsg = {
+  v_phone: "Please enter a valid phone number, for example 0911 714355 or +251 911 714355.",
+  v_link: "Please remove web links from your message."
+};
+const tr = k => (document.documentElement.lang === "am" && am[k]) || enMsg[k];
+const loadedAt = Date.now();
+// Ethiopian mobile/landline (09…, 07…, 011…, +251…) or any international number written with +
+const phoneOk = p => { const d = p.replace(/[\s().-]/g, ""); return /^(?:\+?251|0)?[179]\d{8}$/.test(d) || /^\+\d{8,15}$/.test(d); };
+const hasLink = t => /(https?:\/\/|www\.|\b[a-z0-9-]+\.(?:com|net|org|ru|xyz|io|info|biz|top|site|online)\b)/i.test(t.replace(/[^\s@]+@[^\s@]+\.[a-z]{2,}/gi, "")); // email addresses are fine
+const fPhone = enquiry.elements.phone, fMsg = enquiry.elements.message;
+[fPhone, fMsg].forEach(el => el.addEventListener("input", () => el.setCustomValidity("")));
 enquiry.addEventListener("submit", async e => {
   e.preventDefault();
-  if (!enquiry.reportValidity()) return;
   const f = enquiry.elements, v = n => f[n].value.trim();
+  fPhone.setCustomValidity(v("phone") && !phoneOk(v("phone")) ? tr("v_phone") : "");
+  fMsg.setCustomValidity(hasLink(v("message") + " " + v("building") + " " + v("name")) ? tr("v_link") : "");
+  if (!enquiry.reportValidity()) return;
   const lines = ["Consultation request from marenaproperties.net", "", "Name: " + v("name"), "Phone: " + v("phone")];
   if (v("building")) lines.push("Building: " + v("building"));
   lines.push("Service: " + v("service"));
@@ -928,14 +943,15 @@ enquiry.addEventListener("submit", async e => {
     window.open("https://wa.me/251911714355?text=" + encodeURIComponent(text), "_blank", "noopener");
     return;
   }
-  if (f.botcheck.checked) return;
+  // bots tick the hidden box or submit instantly: pretend it worked, send nothing
+  if (f.botcheck.checked || Date.now() - loadedAt < 3000) { show("s_ok"); enquiry.reset(); return; }
   sendBtn.disabled = true; show("s_sending");
   try {
     const r = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify({
-        access_key: W3F_KEY,
+        access_key: W3F_KEY, botcheck: f.botcheck.checked,
         subject: "Consultation request from " + v("name"),
         from_name: "Marena website",
         Name: v("name"), Phone: v("phone"), Building: v("building") || "-", Service: v("service"),
