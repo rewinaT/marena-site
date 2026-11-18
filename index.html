@@ -26,7 +26,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preload" as="image" href="assets/dema-hope.webp" type="image/webp" fetchpriority="high">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "RealEstateAgent", "name": "Marena Property Solution PLC", "alternateName": "ማሪና ፕሮፐርቲ ሶልሺን ኃ/የተ/የግ/ማህበር", "description": "Building organising, leasing, sales, management and consultancy for commercial, office and residential apartment buildings in Addis Ababa.", "url": "https://marenaproperties.net/", "logo": "https://marenaproperties.net/assets/logo.png", "image": "https://marenaproperties.net/assets/share.jpg", "email": "info@marenaproperties.net", "telephone": ["+251911714355", "+251924005000", "+251984202023"], "address": {"@type": "PostalAddress", "streetAddress": "22 Zurga Building, 3rd floor, office no. 35, Bole Woreda 4", "addressLocality": "Addis Ababa", "addressCountry": "ET"}, "areaServed": {"@type": "City", "name": "Addis Ababa"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "RealEstateAgent", "name": "Marena Property Solution PLC", "alternateName": "ማሪና ፕሮፐርቲ ሶልሺን ኃ/የተ/የግ/ማህበር", "description": "Building organising, leasing, sales, management and consultancy for commercial, office and residential apartment buildings in Addis Ababa.", "url": "https://marenaproperties.net/", "logo": "https://marenaproperties.net/assets/logo.png", "image": "https://marenaproperties.net/assets/share.jpg", "email": "info@marenaproperties.net", "telephone": ["+251911714355", "+251984202023"], "address": {"@type": "PostalAddress", "streetAddress": "22 Zurga Building, 3rd floor, office no. 35, Bole Woreda 4", "addressLocality": "Addis Ababa", "addressCountry": "ET"}, "areaServed": {"@type": "City", "name": "Addis Ababa"}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..800&family=Noto+Sans+Ethiopic:wght@400..800&display=swap" rel="stylesheet">
@@ -166,6 +166,7 @@
   .contact .btn.ghost { color: #fff; border-color: #fff; }
   .contact .btn.ghost:hover { background: #fff; color: var(--ink); }
   .contact .btn:focus-visible, .contact a:focus-visible { outline-color: #7fb2ea; }
+  .hours { margin: 12px 0 0; color: #dfe5eb; }
   .dir { display: inline-block; margin-top: 14px; color: #7fb2ea; font-weight: 600; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .2s, color .2s; }
   .dir:hover { border-color: #7fb2ea; color: #a9cdf5; }
   .dir::after { content: " →"; font-family: "Archivo", sans-serif; }
@@ -501,7 +502,6 @@
           <h3 data-i18n="ct_phone">Phone</h3>
           <ul>
             <li><a href="tel:+251911714355">+251 911 714355</a></li>
-            <li><a href="tel:+251924005000">+251 924 005000</a></li>
             <li><a href="tel:+251984202023">+251 984 202023</a></li>
           </ul>
         </div>
@@ -514,6 +514,7 @@
         <div>
           <h3 data-i18n="ct_office">Office</h3>
           <address><b data-i18n="of_n">22 Zurga Building</b><span data-i18n="of_d">3rd floor, office no. 35, Bole Woreda 4, Addis Ababa, Ethiopia</span></address>
+          <p class="hours" data-i18n="ct_hours">Open 7:00 AM to 7:00 PM</p>
           <a class="dir" href="https://www.google.com/maps/search/?api=1&amp;query=Zurga+Building%2C+Haya+Hulet%2C+Addis+Ababa" target="_blank" rel="noopener" data-i18n="ct_dir">Get directions</a>
         </div>
       </div>
@@ -582,6 +583,7 @@ const am = {
   ft_place: "አዲስ አበባ፣ ኢትዮጵያ",
   skip: "ወደ ዋናው ይዘት ይለፉ",
   ct_wa: "በዋትስአፕ ያነጋግሩን", ct_tg: "በቴሌግራም ይፃፉልን", ct_dir: "አቅጣጫ ይመልከቱ",
+  ct_hours: "የስራ ሰዓት፦ ከጠዋቱ 1፡00 እስከ ምሽቱ 1፡00",
   l_lang: "ቋንቋ", l_menu: "ማውጫ", l_top: "ወደ ላይ ይመለሱ",
   a_hero: "ዴማ ሆፕ ሪል እስቴት፣ ሲግናል የሚገኝ 3B+G+21 የንግድና የመኖሪያ አፓርትመንት ህንፃ",
   a_about: "ዴማ ሆፕ ሪል እስቴት ህንፃ",
@@ -602,7 +604,6 @@ const CURRENT = [
   ["Dema Hope Real Estate", "ዴማ ሆፕ ሪል እስቴት ህንፃ", "Signal", "ሲግናል ጫፍ", "cr", "3B+G+21"],
   ["Fenu Mall", "ፌኑ ሞል", "Lebu, opposite Ashu butchery", "ለቡ አሹ ስጋ ቤት ፊት ለፊት", "c", "B+G+2"],
   ["Mabit Mall", "ማቢት ሞል", "Jacros roundabout", "ጃክሮስ አደባባይ", "cr", "B+G+8"],
-  ["Smart Plaza", "ስማርት ፕላዛ", "Lideta condominium area", "ልደታ ኮንዶሚኒየም አካባቢ", "cr", ""],
   ["Blen Plaza", "ብሌን ፕላዛ", "Lideta condominium area", "ልደታ ኮንዶሚኒየም አካባቢ", "cor", ""],
   ["GTET Real Estate", "ጂቲኢቲ ሪል እስቴት", "Bulgaria", "ቡልጋሪያ ጫፍ", "cr", "1B+G+10"],
   ["Tewedaj Building", "ተወዳጅ ህንፃ", "Gurd Shola, opposite the railway crossing", "ጉርድ ሾላ ባቡር መሻገሪያ ፊት ለፊት", "cr", "G+10"]
