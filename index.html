@@ -243,6 +243,43 @@
   .dir:hover { border-color: #7fb2ea; color: #a9cdf5; }
   .dir::after { content: " →"; font-family: "Archivo", sans-serif; }
 
+  /* How we work */
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); }
+  .step { position: relative; padding-right: 30px; }
+  .step i {
+    display: grid; place-items: center; width: 56px; height: 56px; background: var(--blue); color: #fff;
+    font-style: normal; font-weight: 800; font-size: 18px; letter-spacing: .04em; font-family: "Archivo", sans-serif;
+    clip-path: polygon(0 0, 78% 0, 100% 22%, 100% 100%, 0 100%); position: relative; z-index: 1;
+    transition: background .3s, transform .35s var(--ease);
+  }
+  .step:hover i { background: var(--ink); transform: translateY(-4px); }
+  .step::before { content: ""; position: absolute; left: 56px; right: 0; top: 27px; height: 2px; background: var(--line); transform-origin: 0 50%; transition: transform .9s var(--ease) calc(var(--d, 0ms) + .3s); }
+  .step:last-child::before { display: none; }
+  .js .step.reveal:not(.in)::before { transform: scaleX(0); }
+  .step h3 { font-size: 20px; font-weight: 800; line-height: 1.3; margin: 24px 0 10px; }
+  .step p { margin: 0; color: var(--ink-soft); font-size: 16px; }
+
+  /* FAQ */
+  .faq { display: grid; grid-template-columns: .8fr 1.2fr; gap: 64px; align-items: start; }
+  .faq-head { position: sticky; top: 96px; }
+  .faq-head .sub { margin-bottom: 30px; }
+  .faq-list { border-top: 2px solid var(--ink); }
+  .faq details { border-bottom: 1px solid var(--line); }
+  .faq summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 18px; padding: 22px 4px; font-weight: 700; font-size: 18.5px; line-height: 1.4; transition: color .2s, padding .3s var(--ease); }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary span { flex: 1; }
+  .faq summary::after {
+    content: ""; flex: none; width: 16px; height: 16px;
+    background: linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat, linear-gradient(currentColor, currentColor) center / 2px 100% no-repeat;
+    transition: transform .35s var(--ease);
+  }
+  .faq summary:hover { color: var(--blue); padding-left: 10px; }
+  .faq details[open] summary { color: var(--blue); }
+  .faq details[open] summary::after { transform: rotate(45deg); }
+  .faq details p { margin: 0; padding: 0 44px 24px 4px; color: var(--ink-soft); }
+  @keyframes faqIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+  .faq details[open] p { animation: faqIn .4s var(--ease); }
+
   footer { background: #080a0c; color: #8d98a3; font-size: 14px; padding: 24px 0; }
   footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
 
@@ -400,6 +437,18 @@
     .enquiry { padding: 24px 20px; }
     .about figure { max-width: 380px; }
     .services { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
+    .step { display: grid; grid-template-columns: 56px 1fr; column-gap: 20px; padding: 0 0 32px; }
+    .step:last-child { padding-bottom: 0; }
+    .step i { grid-row: 1 / 3; }
+    .step h3 { margin: 4px 0 8px; }
+    .step h3, .step p { grid-column: 2; }
+    .step::before { left: 27px; right: auto; top: 56px; bottom: 0; width: 2px; height: auto; transform-origin: 50% 0; }
+    .js .step.reveal:not(.in)::before { transform: scaleY(0); }
+    .faq { grid-template-columns: 1fr; gap: 36px; }
+    .faq-head { position: static; }
+    .faq summary { font-size: 17px; padding: 18px 2px; }
+    .faq details p { padding-right: 8px; }
     .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 230px; gap: 10px; }
     .gallery .t1 { grid-column: 1 / 3; grid-row: span 2; }
     .gallery .t2, .gallery .g-cta { grid-column: 1 / 3; }
@@ -435,6 +484,7 @@
       <a href="#about" data-i18n="nav_about">About</a>
       <a href="#services" data-i18n="nav_services">Services</a>
       <a href="#clients" data-i18n="nav_clients">Clients</a>
+      <a href="#faq" data-i18n="nav_faq">FAQ</a>
       <a href="#contact" data-i18n="nav_contact">Contact</a>
     </nav>
     <div class="lang" role="group" aria-label="Language" data-i18n-label="l_lang">
@@ -552,7 +602,21 @@
     </div>
   </section>
 
-  <section id="clients">
+  <section id="process">
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="proc_eyebrow">How we work</p>
+      <h2 data-i18n="proc_title">Four steps from the first conversation to the work</h2>
+      <p class="sub" data-i18n="proc_sub">This is what happens when you start working with us.</p>
+      <ol class="steps">
+        <li class="step"><i aria-hidden="true">01</i><h3 data-i18n="p1_t">We meet</h3><p data-i18n="p1_d">Tell us about your building by phone, WhatsApp or the form. We arrange a meeting to understand what you need.</p></li>
+        <li class="step"><i aria-hidden="true">02</i><h3 data-i18n="p2_t">We study the building</h3><p data-i18n="p2_d">We survey local rents and the mix of businesses that suits the building, then present our proposal.</p></li>
+        <li class="step"><i aria-hidden="true">03</i><h3 data-i18n="p3_t">We sign an agreement</h3><p data-i18n="p3_d">You choose the services, for the whole building or part of it. The fee is agreed with you and we work under a signed agreement.</p></li>
+        <li class="step"><i aria-hidden="true">04</i><h3 data-i18n="p4_t">We do the work and follow up</h3><p data-i18n="p4_d">Our team organises, leases, sells or manages as agreed, and keeps checking that the work is delivered.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="clients" class="alt">
     <div class="wrap">
       <p class="eyebrow" data-i18n="cl_eyebrow">Clients</p>
       <h2 data-i18n="cl_title">Buildings we work with</h2>
@@ -579,6 +643,27 @@
       <h3 class="list-title" data-i18n="past_title">Previously served</h3>
       <p class="list-note" data-i18n="past_note">Among the clients our professionals have served before.</p>
       <ul class="clients" id="past"></ul>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap faq">
+      <div class="faq-head">
+        <p class="eyebrow" data-i18n="faq_eyebrow">Questions and answers</p>
+        <h2 data-i18n="faq_title">What building owners ask us most</h2>
+        <p class="sub" data-i18n="faq_sub">If your question is not here, talk to us and we will gladly explain.</p>
+        <a class="btn ghost" href="#contact" data-i18n="faq_cta">Ask us a question</a>
+      </div>
+      <div class="faq-list">
+        <details name="faq" open><summary><span data-i18n="q1">What kinds of buildings do you work with?</span></summary><p data-i18n="a1">Commercial centres, office buildings, mixed-use buildings and residential apartments in Addis Ababa, small and large. Our professionals have served more than 45 buildings.</p></details>
+        <details name="faq"><summary><span data-i18n="q2">Can I take only one service, or only part of my building?</span></summary><p data-i18n="a2">Yes. We organise, lease, sell, manage and advise for the whole building or part of it, according to what you ask for.</p></details>
+        <details name="faq"><summary><span data-i18n="q3">How much do you charge?</span></summary><p data-i18n="a3">The fee depends on the services you choose and is agreed in discussion with each client. Book a meeting and we will tell you what applies to your building.</p></details>
+        <details name="faq"><summary><span data-i18n="q4">Is the company licensed?</span></summary><p data-i18n="a4">Yes. Marena Property Solution PLC is licensed by the Addis Ababa City Administration Trade Bureau for property brokerage, renting of fixed property, and business and investment consultancy. The licence details are in the About section.</p></details>
+        <details name="faq"><summary><span data-i18n="q5">What does building management cover?</span></summary><p data-i18n="a5">We take over marketing, administration, part of finance, security and parking, cleaning and technical work, and hire the staff for it. We check that services run 24/7 and oversee preventive maintenance of lifts, electrical boards, water tanks and generators.</p></details>
+        <details name="faq"><summary><span data-i18n="q6">Who decides the rent and the tenants?</span></summary><p data-i18n="a6">The owner decides. We survey local rents and propose a profitable rent, negotiate in the building's long-term interest, and present the terms to the owners for decision. Lease contracts are signed with the building's owner.</p></details>
+        <details name="faq"><summary><span data-i18n="q7">My building is new and not yet let. Can you help?</span></summary><p data-i18n="a7">Yes. Our organising service prepares a building for letting: a rent survey, a study of the right mix of businesses, security, cleaning, maintenance and parking units, and the management structure. We also carry out feasibility studies.</p></details>
+        <details name="faq"><summary><span data-i18n="q8">How do I get started?</span></summary><p data-i18n="a8">Call us, message us on WhatsApp or Telegram, or fill in the form below. Our office is in the Dema Hope Real Estate building at Signal, open 7:00 AM to 7:00 PM.</p></details>
+      </div>
     </div>
   </section>
 
@@ -707,6 +792,34 @@ const am = {
   s4_b: "አገልግሎቱ በሚያስፈልገው የሰው ኃይል መጠንና ብቃት 24/7 እየተሰጠ መሆኑን መቆጣጠር።",
   s4_c: "የፓርኪንግ አጠቃቀም፣ የቆሻሻ አወጋገድና የእቃ አወጣጥ ደንቦች መከበራቸውን በየእለቱ መቆጣጠር።",
   s4_d: "የሊፍት፣ የኤሌክትሪክ ቦርድ፣ የውሃ ታንከርና የጄኔሬተር ቅድመ ብልሽት መከላከልና ጥገና ስራዎችን መቆጣጠር።",
+  nav_faq: "ጥያቄዎች",
+  proc_eyebrow: "የአሰራር ሂደታችን",
+  proc_title: "ከመጀመሪያው ውይይት እስከ ስራው ድረስ አራት ደረጃዎች",
+  proc_sub: "ከእኛ ጋር መስራት ሲጀምሩ የሚከናወኑት ደረጃዎች እነዚህ ናቸው።",
+  p1_t: "እንገናኛለን", p1_d: "ስለ ህንፃዎ በስልክ፣ በዋትስአፕ ወይም በቅፁ ይንገሩን። ፍላጎትዎን ለመረዳት ቀጠሮ እንይዛለን።",
+  p2_t: "ህንፃውን እናጠናለን", p2_d: "የአካባቢውን የኪራይ ዋጋና ለህንፃው የሚስማማውን የንግድ ዘርፍ ስብጥር አጥንተን ሀሳባችንን እናቀርባለን።",
+  p3_t: "ውል እንፈራረማለን", p3_d: "የሚፈልጉትን አገልግሎት ለሙሉ ህንፃው ወይም ለከፊሉ ይመርጣሉ። ክፍያው በውይይት ይወሰናል፤ ስራውንም በተፈረመ ውል መሰረት እንሰራለን።",
+  p4_t: "ስራውን እንሰራለን፣ እንከታተላለን", p4_d: "ቡድናችን በስምምነቱ መሰረት ያደራጃል፣ ያከራያል፣ ይሸጣል ወይም ያስተዳድራል፤ ስራው በአግባቡ መከናወኑንም ይከታተላል።",
+  faq_eyebrow: "ጥያቄና መልስ",
+  faq_title: "የህንፃ ባለቤቶች ብዙ ጊዜ የሚጠይቁን ጥያቄዎች",
+  faq_sub: "ጥያቄዎ እዚህ ከሌለ ያነጋግሩን፤ በደስታ እናብራራለን።",
+  faq_cta: "ጥያቄ ይጠይቁን",
+  q1: "ከምን ዓይነት ህንፃዎች ጋር ትሰራላችሁ?",
+  a1: "በአዲስ አበባ ከሚገኙ አነስተኛና ግዙፍ የንግድ ማዕከላት፣ የቢሮ ህንፃዎች፣ የቅይጥ አገልግሎት ህንፃዎችና የመኖሪያ አፓርትመንቶች ጋር እንሰራለን። ባለሙያዎቻችን ከ45 በላይ ህንፃዎችን አገልግለዋል።",
+  q2: "አንድ አገልግሎት ብቻ ወይም ለህንፃው ከፊል ብቻ አገልግሎት ማግኘት እችላለሁ?",
+  a2: "አዎ። የማደራጀት፣ የማከራየት፣ የመሸጥ፣ የማስተዳደርና የማማከር ስራዎችን ለሙሉ ህንፃው ወይም ለከፊሉ፣ እርስዎ በሚያቀርቡት ፍላጎት መሰረት እንሰራለን።",
+  q3: "የአገልግሎት ክፍያችሁ ምን ያህል ነው?",
+  a3: "ክፍያው በመረጡት አገልግሎት ላይ ተመስርቶ ከእያንዳንዱ ደንበኛ ጋር በውይይት ይወሰናል። ለህንፃዎ የሚሆነውን ለማወቅ ቀጠሮ ይያዙ።",
+  q4: "ድርጅቱ ህጋዊ ፈቃድ አለው?",
+  a4: "አዎ። ማሪና ፕሮፐርቲ ሶልሽን ኃ/የተ/የግ/ማህበር ከአዲስ አበባ ከተማ አስተዳደር ንግድ ቢሮ በቋሚ ንብረት የአገናኝነት፣ በቋሚ ንብረት የማከራየት እንዲሁም በቢዝነስና ኢንቨስትመንት የማማከር ዘርፎች ፈቃድ አለው። የፈቃዱ ዝርዝር «ስለ እኛ» በሚለው ክፍል ይገኛል።",
+  q5: "የህንፃ ማስተዳደር አገልግሎት ምን ምን ያካትታል?",
+  a5: "የማርኬቲንግ፣ የአስተዳደር፣ የፋይናንስ (በከፊል)፣ የጥበቃና ፓርኪንግ፣ የፅዳትና የቴክኒክ ስራዎችን ተረክበን ሰራተኞችን ቀጥረን እንሰራለን። አገልግሎቱ 24/7 መሰጠቱን እንቆጣጠራለን፤ የሊፍት፣ የኤሌክትሪክ ቦርድ፣ የውሃ ታንከርና የጄኔሬተር ቅድመ ብልሽት መከላከል ስራዎችንም እንከታተላለን።",
+  q6: "የኪራይ ዋጋንና ተከራዮችን የሚወስነው ማን ነው?",
+  a6: "ውሳኔው የባለንብረቱ ነው። እኛ የአካባቢውን የኪራይ ዋጋ አጥንተን አዋጪ ዋጋ እናቀርባለን፣ የህንፃውን ዘላቂ ጥቅም ባስጠበቀ መልኩ እንደራደራለን፣ ውጤቱንም ለባለንብረቶች ለውሳኔ እናቀርባለን። የኪራይ ውል የሚፈረመው ከህንፃው ህጋዊ አካል ጋር ነው።",
+  q7: "ህንፃዬ አዲስ ነው፤ ገና አልተከራየም። ልትረዱኝ ትችላላችሁ?",
+  a7: "አዎ። የማደራጀት አገልግሎታችን ህንፃውን ለኪራይ ያዘጋጃል፤ የኪራይ ዋጋ ዳሰሳ፣ የንግድ ዘርፍ ስብጥር ጥናት፣ የጥበቃ፣ የፅዳት፣ የጥገናና የፓርኪንግ ክፍሎችን ማደራጀት እንዲሁም የአስተዳደር መዋቅር ዝግጅትን ያካትታል። የአዋጭነት ጥናትም እንሰራለን።",
+  q8: "እንዴት ልጀምር?",
+  a8: "ይደውሉልን፣ በዋትስአፕ ወይም በቴሌግራም ይፃፉልን፣ ወይም ከታች ያለውን ቅፅ ይሙሉ። ቢሮአችን ሲግናል በሚገኘው ዴማ ሆፕ ሪል እስቴት ህንፃ ላይ ነው፤ ከጠዋቱ 1፡00 እስከ ምሽቱ 1፡00 ክፍት ነው።",
   cl_eyebrow: "ደንበኞች",
   cl_title: "አብረናቸው የምንሰራ ህንፃዎች",
   cl_sub: "ማሪና እና ባለሙያዎቹ በአዲስ አበባ አገልግሎት ከሚሰጧቸውና ከሰጧቸው ህንፃዎች መካከል።",
@@ -830,6 +943,13 @@ const asked = new URLSearchParams(location.search).get("lang");
 if (asked === "am" || asked === "en") saved = asked;
 setLang(saved === "am" ? "am" : "en");
 document.getElementById("yr").textContent = new Date().getFullYear();
+// tell search engines about the questions and answers
+{
+  const ld = document.createElement("script"); ld.type = "application/ld+json";
+  ld.textContent = JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage",
+    mainEntity: [1, 2, 3, 4, 5, 6, 7, 8].map(i => ({ "@type": "Question", name: en["q" + i], acceptedAnswer: { "@type": "Answer", text: en["a" + i] } })) });
+  document.head.append(ld);
+}
 
 /* ---------- Motion ---------- */
 const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -842,6 +962,10 @@ const $$ = s => [...document.querySelectorAll(s)];
   [".about > div > *", 90],
   ["#services .eyebrow, #services h2, #services .sub", 90],
   [".service", 110],
+  ["#process .eyebrow, #process h2, #process .sub", 90],
+  [".step", 140],
+  [".faq-head > *", 90],
+  [".faq-list", 0],
   ["#clients > .wrap > .eyebrow, #clients h2, #clients .sub", 90],
   [".gallery > *", 100, "wipe"],
   [".list-title, .list-note", 0],
